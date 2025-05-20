@@ -8,23 +8,10 @@ const hasilPoin = {
     lilitan: 0
 };
 
-// Data soal sebagai fallback jika fetch gagal
-const fallbackData = [
-  {
-    "soal": "Apakah dinamo starter berputar dengan lambat saat menyalakan mobil?",
-    "pilihan": [
-      { "jawaban": "Ya, sangat lambat", "poin": { "aki": 1, "brush": 1 } },
-      { "jawaban": "Lambat tapi masih bisa", "poin": { "aki": 1 } },
-      { "jawaban": "Normal", "poin": {} },
-      { "jawaban": "Tidak berputar sama sekali", "poin": { "dinamo": 2 } }
-    ]
-  },
-  // ... (data soal lainnya dari diagnosis.json)
-];
 
 function renderSoal(dataSoal) {
     const container = document.getElementById("quiz-container");
-    container.innerHTML = ''; // Kosongkan container terlebih dahulu
+    container.innerHTML = '';
     
     if (!dataSoal || dataSoal.length === 0) {
         container.innerHTML = '<div class="alert alert-danger">Data soal tidak tersedia. Silakan refresh halaman.</div>';
@@ -100,7 +87,7 @@ function hitungDiagnosa() {
     } else {
         hasilDiagnosis = "Kemungkinan kerusakan pada:\n";
         kerusakan.forEach(k => {
-            hasilDiagnosis += `- ${k.charAt(0).toUpperCase() + k.slice(1)} (Skor: ${hasil[k]})\n`;
+            hasilDiagnosis += `- ${k.charAt(0).toUpperCase() + k.slice(1)}`;
             if (estimasiBiaya[k]) {
                 hasilDiagnosis += `  Estimasi biaya perbaikan: Rp ${estimasiBiaya[k].toLocaleString('id-ID')}\n\n`;
             }

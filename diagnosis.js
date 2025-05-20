@@ -8,47 +8,79 @@ const hasilPoin = {
     lilitan: 0
 };
 
+// Data soal sebagai fallback jika fetch gagal
+const fallbackData = [
+  {
+    "soal": "Apakah dinamo starter berputar dengan lambat saat menyalakan mobil?",
+    "pilihan": [
+      { "jawaban": "Ya, sangat lambat", "poin": { "aki": 1, "brush": 1 } },
+      { "jawaban": "Lambat tapi masih bisa", "poin": { "aki": 1 } },
+      { "jawaban": "Normal", "poin": {} },
+      { "jawaban": "Tidak berputar sama sekali", "poin": { "dinamo": 2 } }
+    ]
+  },
+  // ... (data soal lainnya dari diagnosis.json)
+];
+
 function renderSoal(dataSoal) {
     const container = document.getElementById("quiz-container");
+    container.innerHTML = ''; // Kosongkan container terlebih dahulu
+    
+    if (!dataSoal || dataSoal.length === 0) {
+        container.innerHTML = '<div class="alert alert-danger">Data soal tidak tersedia. Silakan refresh halaman.</div>';
+        return;
+    }
+    
     dataSoal.forEach((q, i) => {
         const div = document.createElement("div");
-        div.classList.add("mb-3");
-        div.innerHTML = `<p><strong>${i + 1}. ${q.soal}</strong></p>`;
+        div.classList.add("mb-4", "p-3", "border", "rounded");
+        div.innerHTML = `<p class="fw-bold">${i + 1}. ${q.soal}</p>`;
+        
         q.pilihan.forEach((opt, j) => {
             div.innerHTML += `
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="soal${i}" id="soal${i}_pilihan${j}" value='${JSON.stringify(opt.poin)}'>
+                    <input class="form-check-input" type="radio" name="soal${i}" id="soal${i}_pilihan${j}" value='${JSON.stringify(opt.poin)}' required>
                     <label class="form-check-label" for="soal${i}_pilihan${j}">${opt.jawaban}</label>
                 </div>`;
         });
+        
         container.appendChild(div);
     });
 }
 
 function hitungDiagnosa() {
     const radios = document.querySelectorAll("input[type='radio']:checked");
-    const totalSoal = document.querySelectorAll("fieldset").length || document.querySelectorAll("input[type='radio']").length / 4;
-
+    const totalSoal = document.querySelectorAll('[id^="soal"]').length / 4; // 4 pilihan per soal
+    
     if (radios.length < totalSoal) {
         alert(`Silakan jawab semua pertanyaan terlebih dahulu. Masih ada ${totalSoal - radios.length} pertanyaan yang belum dijawab.`);
         return;
     }
 
+    // Reset hasil poin
     let hasil = {...hasilPoin};
 
     radios.forEach(r => {
-        const poin = JSON.parse(r.value);
-        for (let key in poin) {
-            hasil[key] += poin[key];
+        try {
+            const poin = JSON.parse(r.value);
+            for (let key in poin) {
+                if (hasil.hasOwnProperty(key)) {
+                    hasil[key] += poin[key];
+                }
+            }
+        } catch (e) {
+            console.error("Error parsing radio value:", e);
         }
     });
 
     let max = 0;
-    let kerusakan = "Tidak terdeteksi kerusakan yang spesifik";
+    let kerusakan = [];
     for (let k in hasil) {
         if (hasil[k] > max) {
             max = hasil[k];
-            kerusakan = `Kemungkinan kerusakan pada: ${k}`;
+            kerusakan = [k];
+        } else if (hasil[k] === max && max > 0) {
+            kerusakan.push(k);
         }
     }
 
@@ -62,18 +94,42 @@ function hitungDiagnosa() {
         lilitan: 400000
     };
 
-    let biaya = 0;
-    const komponen = kerusakan.split(': ')[1];
-    if (estimasiBiaya[komponen]) {
-        biaya = estimasiBiaya[komponen];
-        kerusakan += `\nEstimasi biaya perbaikan: Rp ${biaya.toLocaleString('id-ID')}`;
+    let hasilDiagnosis = "";
+    if (max === 0) {
+        hasilDiagnosis = "Tidak terdeteksi kerusakan yang spesifik berdasarkan jawaban Anda.";
+    } else {
+        hasilDiagnosis = "Kemungkinan kerusakan pada:\n";
+        kerusakan.forEach(k => {
+            hasilDiagnosis += `- ${k.charAt(0).toUpperCase() + k.slice(1)} (Skor: ${hasil[k]})\n`;
+            if (estimasiBiaya[k]) {
+                hasilDiagnosis += `  Estimasi biaya perbaikan: Rp ${estimasiBiaya[k].toLocaleString('id-ID')}\n\n`;
+            }
+        });
     }
 
-    document.getElementById("hasil").innerText = kerusakan;
+    document.getElementById("hasil").textContent = hasilDiagnosis;
 }
 
-// Ambil data soal dari JSON
-fetch("dataSoal.json")
-    .then(response => response.json())
-    .then(data => renderSoal(data))
-    .catch(error => console.error("Gagal memuat data soal:", error));
+// Fungsi untuk memuat data soal
+function loadQuestions() {
+    fetch("diagnosis.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Soal berhasil dimuat:", data);
+            renderSoal(data);
+        })
+        .catch(error => {
+            console.error("Gagal memuat data soal dari server, menggunakan data fallback:", error);
+            renderSoal(fallbackData);
+        });
+}
+
+// Jalankan saat halaman selesai dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    loadQuestions();
+});

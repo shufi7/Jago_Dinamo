@@ -1,3 +1,5 @@
+// File: komponen/script/diagnosis.js
+
 const hasilPoin = {
     aki: 0,
     brush: 0,
@@ -8,21 +10,42 @@ const hasilPoin = {
     lilitan: 0
 };
 
+const fallbackData = [
+    {
+        soal: "Apakah mobil sulit dinyalakan?",
+        pilihan: [
+            { jawaban: "Ya", poin: { aki: 1, dinamo: 1 } },
+            { jawaban: "Tidak", poin: {} },
+            { jawaban: "Kadang-kadang", poin: { aki: 0.5 } },
+            { jawaban: "Tidak tahu", poin: {} }
+        ]
+    },
+    {
+        soal: "Apakah lampu dashboard tidak menyala saat kontak ON?",
+        pilihan: [
+            { jawaban: "Ya", poin: { aki: 1, sekring: 1 } },
+            { jawaban: "Tidak", poin: {} },
+            { jawaban: "Kadang-kadang", poin: { sekring: 0.5 } },
+            { jawaban: "Tidak tahu", poin: {} }
+        ]
+    }
+    // Tambahkan soal lain jika perlu
+];
 
 function renderSoal(dataSoal) {
     const container = document.getElementById("quiz-container");
     container.innerHTML = '';
-    
+
     if (!dataSoal || dataSoal.length === 0) {
         container.innerHTML = '<div class="alert alert-danger">Data soal tidak tersedia. Silakan refresh halaman.</div>';
         return;
     }
-    
+
     dataSoal.forEach((q, i) => {
         const div = document.createElement("div");
         div.classList.add("mb-4", "p-3", "border", "rounded");
         div.innerHTML = `<p class="fw-bold">${i + 1}. ${q.soal}</p>`;
-        
+
         q.pilihan.forEach((opt, j) => {
             div.innerHTML += `
                 <div class="form-check">
@@ -30,22 +53,21 @@ function renderSoal(dataSoal) {
                     <label class="form-check-label" for="soal${i}_pilihan${j}">${opt.jawaban}</label>
                 </div>`;
         });
-        
+
         container.appendChild(div);
     });
 }
 
 function hitungDiagnosa() {
     const radios = document.querySelectorAll("input[type='radio']:checked");
-    const totalSoal = document.querySelectorAll('[id^="soal"]').length / 4; // 4 pilihan per soal
-    
+    const totalSoal = document.querySelectorAll('[id^="soal"]').length / 4; // Asumsi 4 pilihan per soal
+
     if (radios.length < totalSoal) {
         alert(`Silakan jawab semua pertanyaan terlebih dahulu. Masih ada ${totalSoal - radios.length} pertanyaan yang belum dijawab.`);
         return;
     }
 
-    // Reset hasil poin
-    let hasil = {...hasilPoin};
+    let hasil = { ...hasilPoin };
 
     radios.forEach(r => {
         try {
@@ -62,6 +84,7 @@ function hitungDiagnosa() {
 
     let max = 0;
     let kerusakan = [];
+
     for (let k in hasil) {
         if (hasil[k] > max) {
             max = hasil[k];
@@ -89,7 +112,7 @@ function hitungDiagnosa() {
         kerusakan.forEach(k => {
             hasilDiagnosis += `- ${k.charAt(0).toUpperCase() + k.slice(1)}`;
             if (estimasiBiaya[k]) {
-                hasilDiagnosis += `  Estimasi biaya perbaikan: Rp ${estimasiBiaya[k].toLocaleString('id-ID')}\n\n`;
+                hasilDiagnosis += `  | Estimasi biaya: Rp ${estimasiBiaya[k].toLocaleString('id-ID')}\n\n`;
             }
         });
     }
@@ -97,9 +120,8 @@ function hitungDiagnosa() {
     document.getElementById("hasil").textContent = hasilDiagnosis;
 }
 
-// Fungsi untuk memuat data soal
 function loadQuestions() {
-    fetch("diagnosis.json")
+    fetch("komponen/data/diagnosis.json")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
@@ -116,7 +138,6 @@ function loadQuestions() {
         });
 }
 
-// Jalankan saat halaman selesai dimuat
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     loadQuestions();
 });

@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 /* Navbar Home Page*/
 /* Background dan padding navbar */
+* {
+    font-family: 'Poppins', sans-serif ;
+}
 .custom-navbar {
     background-color: #0A0F2C;
     padding: 5px 70px;
@@ -41,19 +45,18 @@
 
 /* Hero Section */
 .hero {
-  background-color: #0d0f2b;
+    background-color: #0A0F2C;
 }
 
+.text-main-tagline {
+    color: #D4AF37;
+    font-weight: 600;
+}
 .hero img {
-  vertical-align: middle;
+    vertical-align: middle;
+    width: 200px;
 }
 
-/* Layanan Section */
-.layanan {
-  background: linear-gradient(to bottom, #d8a625 30%, #e5e5e5 30%);
-}
-
-/* Footer */
-footer {
-  background-color: #0d0f2b;
+.hero .dinamo {
+    border-radius: 100px;
 }

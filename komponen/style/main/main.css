@@ -1,0 +1,59 @@
+/* Navbar Home Page*/
+/* Background dan padding navbar */
+.custom-navbar {
+    background-color: #0A0F2C;
+    padding: 5px 70px;
+}
+
+.logo-navbar {
+    width: 210px;
+}
+/* Link nav */
+.custom-navbar .nav-link {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.button-text {
+    color: #ffffff;
+}
+
+.button-text:hover {
+    color: #D4AF37;
+}
+
+/* Tombol Order */
+.order-button {
+    background: #D4AF37;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.order-button:hover {
+    background: #ffffff;
+    color: #0A0F2C;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #0d0f2b;
+}
+
+.hero img {
+  vertical-align: middle;
+}
+
+/* Layanan Section */
+.layanan {
+  background: linear-gradient(to bottom, #d8a625 30%, #e5e5e5 30%);
+}
+
+/* Footer */
+footer {
+  background-color: #0d0f2b;
+}

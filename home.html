@@ -12,35 +12,49 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container-fluid">
+        <div class="container-fluid d-flex justify-content-between">
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center text-white" href="#">
                 <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
             </a>
 
-            <!-- Menu -->
-            <div class="d-flex align-items-center ms-auto ">
-                <a class="nav-link me-4 button-text" href="#">Diagnosis</a>
-                <a class="nav-link me-4 button-text" href="#">Periksa Progres Perbaikan</a>
-                <a href="#" class="btn order-button">Order</a>
+            <!-- Toggler (Kanan) -->
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu (Muncul Kanan di Mobile) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-end">
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="#">Diagnosis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="#">Periksa Progres Perbaikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="btn order-button mt-2 mt-lg-0">Order</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
+
     <!-- Tagline Content -->
-    <section class="hero text-white text-center">
+    <section class="hero text-white text-center tagline">
         <div class="container col-12 py-5">
-            <p class="display-3 mt-5 ">
+            <p class="display-3 mt-5 text-tagline">
                 <span class="text-main-tagline">JagoDinamo.Id</span>
                 <img src="/komponen/image/dinamomobil.jpg" alt="gear" class="mx-1 dinamo" />
                 The solution
                 <br>to all
-                <img src="/komponen/image/Gear.png" alt="gear" class="mx-1" />
+                <img src="/komponen/image/Gear.png" alt="gear" class="mx-1 gear" />
                 your car problems.
             </p>
         </div>
     </section>
     <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

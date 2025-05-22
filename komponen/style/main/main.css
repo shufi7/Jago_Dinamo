@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Navbar Home Page*/
 /* Background dan padding navbar */
 * {
-    font-family: 'Poppins', sans-serif ;
+    font-family: 'Poppins', sans-serif;
 }
+
 .custom-navbar {
     background-color: #0A0F2C;
     padding: 5px 70px;
@@ -12,6 +14,7 @@
 .logo-navbar {
     width: 210px;
 }
+
 /* Link nav */
 .custom-navbar .nav-link {
     font-weight: 400;
@@ -27,20 +30,32 @@
 }
 
 /* Tombol Order */
+.custom-navbar {
+    background-color: #0d0f2b;
+    padding: 10px 20px;
+}
+
 .order-button {
-    background: #D4AF37;
+    background: linear-gradient(90deg, #d8a625, #e2c15c);
     color: white;
-    border: none;
-    padding: 8px 20px;
-    font-size: 16px;
     font-weight: bold;
     border-radius: 8px;
-    transition: background 0.3s;
+    padding: 8px 20px;
+    border: none;
+    transition: 0.3s;
 }
 
 .order-button:hover {
-    background: #ffffff;
-    color: #0A0F2C;
+    background: linear-gradient(90deg, #c89f24, #d9c24f);
+    color: white;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 /* Hero Section */
@@ -52,6 +67,7 @@
     color: #D4AF37;
     font-weight: 600;
 }
+
 .hero img {
     vertical-align: middle;
     width: 200px;
@@ -59,4 +75,87 @@
 
 .hero .dinamo {
     border-radius: 100px;
+}
+
+@media (max-width: 1400px) {
+    .text-tagline {
+        font-size: 60px;
+    }
+    .hero img {
+    vertical-align: middle;
+    width: 150px;
+}
+}
+
+/* Tambahan untuk menu mobile */
+@media (max-width: 1200px) {
+    .text-tagline {
+        font-size: 50px;
+    }
+    .hero img {
+    vertical-align: middle;
+    width: 150px;
+}
+}
+
+/* Tambahan untuk menu mobile */
+@media (max-width: 1000px) {
+    .navbar-collapse {
+        background-color: #0d0f2b;
+        padding: 1rem;
+    }
+
+    .navbar-nav {
+        align-items: flex-end !important;
+    }
+    .text-tagline {
+        font-size: 35px;
+    }
+    .hero img {
+        vertical-align: middle;
+        width: 130px;
+    }   
+}
+
+/* Tambahan untuk menu mobile */
+@media (max-width: 700px) {
+    .text-tagline {
+        font-size: 40px;
+    }
+    .hero img {
+        vertical-align: middle;
+        width: 120px;
+    }   
+}
+
+@media (max-width: 500px) {
+    .tagline {
+        margin-top: -50px;
+    }
+    .logo-navbar {
+        width: 120px;
+    }
+    .text-tagline {
+        font-size: 36px;
+    }
+    .hero img {
+        vertical-align: middle;
+        width: 90px;
+    }   
+}
+
+@media (max-width: 390px) {
+    .tagline {
+        margin-top: -50px;
+    }
+    .logo-navbar {
+        width: 110px;
+    }
+    .text-tagline {
+        font-size: 30px;
+    }
+    .hero img {
+        vertical-align: middle;
+        width: 50px;
+    }   
 }

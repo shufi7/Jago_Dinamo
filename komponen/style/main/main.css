@@ -36,7 +36,7 @@
 }
 
 .order-button {
-    background: linear-gradient(90deg, #d8a625, #e2c15c);
+    background: #D4AF37;
     color: white;
     font-weight: bold;
     border-radius: 8px;
@@ -46,7 +46,7 @@
 }
 
 .order-button:hover {
-    background: linear-gradient(90deg, #c89f24, #d9c24f);
+    background: #D4AF37;
     color: white;
 }
 
@@ -77,6 +77,22 @@
     border-radius: 100px;
 }
 
+.list-content {
+    background-color: #D4AF37;
+    padding-top: 100px;
+    margin-top: -50px;
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+}
+
+.card-tagline {
+    margin-top: -30px;
+    padding-top: 10px;
+}
+
 @media (max-width: 1400px) {
     .text-tagline {
         font-size: 60px;
@@ -104,6 +120,16 @@
         background-color: #0d0f2b;
         padding: 1rem;
     }
+    .hero {
+        padding-bottom: 50px;
+    }
+    .card-tagline {
+        margin-top: -50px;
+    }
+    .list-content {
+        margin-top: -90px;
+    }
+    
 
     .navbar-nav {
         align-items: flex-end !important;

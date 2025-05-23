@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
+    <title>Login - JagoDinamoId</title>
+    <style>
+        body {
+            background-color: #0A0F2C; 
+        }
+
+        .login {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            width: 100px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .footer {
+            color: white;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        .ilustrasi {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: auto;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .btn{
+            background-color: #D4AF37;
+            color: white;
+        }
+
+        .small-text {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid col-lg-12 py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center">
+                <img src="/komponen/image/white logo.png" alt="logo" class="ilustrasi">
+            </div>
+            <div class="col-lg-6">
+                <div class="login">
+                    <img src="/komponen/image/black logo.png" alt="logo" class="logo">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Alamat Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Kata Sandi">
+                        </div>
+                        <button type="submit" class="btn w-100 fw-bold">Masuk</button>
+                        <p class="text-center mt-3 small-text">Belum Punya Akun? Klik ini untuk membuat akun: <a href="#" class="fw-bold">Buat Akun</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Powered by JagoDinamoId
+    </div>
+
+    <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

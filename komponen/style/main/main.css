@@ -104,7 +104,7 @@
     border-radius: 20px;
 }
 .image-content {
-    width: 350px;
+    width: 100%;
 }
 .title-content {
     font-size: 25px;
@@ -171,10 +171,13 @@
     .hero img {
         vertical-align: middle;
         width: 130px;
-    }   
+    }
+    .descript-content {
+        font-size: 10px;
+    }
 }
 
-/* Tambahan untuk menu mobile */
+
 @media (max-width: 700px) {
     .text-tagline {
         font-size: 40px;

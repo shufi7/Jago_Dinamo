@@ -17,7 +17,7 @@
                 <div class="card card-login">
                     <img src="/komponen/image/logo2.png" alt="logo" class="logo">
                     <p class=" text-center log-head">JagoDinamo.id</p>
-                    <form>
+                    <form id="loginForm">
                         <div class="mb-3">
                             <label class="form-label">Alamat Email : </label>
                             <input type="email" class="form-control" id="email" placeholder="Email">
@@ -26,6 +26,7 @@
                             <label class="form-label">Password : </label>
                             <input type="password" class="form-control" id="password" placeholder="Kata Sandi">
                         </div>
+                        <p id="error-message" style="color: red; display: none;" class="text-center"></p>
                         <button type="submit" class="btn w-100 fw-bold">Masuk</button>
                         <p class="text-center mt-3 small-text">All Rights Reserved. Copyright By JagoDinamo.Id</a>
                         </p>
@@ -34,6 +35,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Mencegah form melakukan submit default
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
+
+        const validEmail = "JagoDinamo.Id@gmail.com";
+        const validPassword = "admin1234";
+
+        if (email === validEmail && password === validPassword) {
+            // Redirect ke halaman utama
+            window.location.href = "home.html"; // Ganti sesuai nama file halaman utama
+        } else {
+            // Tampilkan pesan error
+            errorMessage.style.display = "block";
+            errorMessage.textContent = "Masukkan email atau password nya dengan benar";
+        }
+    });
+    </script>
+
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

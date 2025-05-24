@@ -1,143 +1,131 @@
-// File: komponen/script/diagnosis.js
-
-const hasilPoin = {
-    aki: 0,
-    brush: 0,
-    dinamo: 0,
-    solenoid: 0,
-    kabel: 0,
-    sekring: 0,
-    lilitan: 0
+const estimasiBiaya = {
+    aki: 300000,
+    brush: 150000,
+    dinamo: 800000,
+    solenoid: 250000,
+    kabel: 100000,
+    sekring: 50000,
+    lilitan: 400000
 };
 
-const fallbackData = [
-    {
-        soal: "Apakah mobil sulit dinyalakan?",
-        pilihan: [
-            { jawaban: "Ya", poin: { aki: 1, dinamo: 1 } },
-            { jawaban: "Tidak", poin: {} },
-            { jawaban: "Kadang-kadang", poin: { aki: 0.5 } },
-            { jawaban: "Tidak tahu", poin: {} }
-        ]
-    },
-    {
-        soal: "Apakah lampu dashboard tidak menyala saat kontak ON?",
-        pilihan: [
-            { jawaban: "Ya", poin: { aki: 1, sekring: 1 } },
-            { jawaban: "Tidak", poin: {} },
-            { jawaban: "Kadang-kadang", poin: { sekring: 0.5 } },
-            { jawaban: "Tidak tahu", poin: {} }
-        ]
-    }
-    // Tambahkan soal lain jika perlu
-];
+const namaKomponen = {
+    aki: "Aki",
+    brush: "Brush Dinamo",
+    dinamo: "Dinamo Starter",
+    solenoid: "Solenoid",
+    kabel: "Kabel Kelistrikan",
+    sekring: "Sekring",
+    lilitan: "Lilitan Dinamo"
+};
 
-function renderSoal(dataSoal) {
+let hasilPoin = {};
+let currentNode = null;
+
+function resetPoin() {
+    hasilPoin = {
+        aki: 0,
+        brush: 0,
+        dinamo: 0,
+        solenoid: 0,
+        kabel: 0,
+        sekring: 0,
+        lilitan: 0
+    };
+}
+
+function renderNode(node) {
     const container = document.getElementById("quiz-container");
     container.innerHTML = '';
 
-    if (!dataSoal || dataSoal.length === 0) {
-        container.innerHTML = '<div class="alert alert-danger">Data soal tidak tersedia. Silakan refresh halaman.</div>';
-        return;
-    }
+    if (!node) return;
 
-    dataSoal.forEach((q, i) => {
-        const div = document.createElement("div");
-        div.classList.add("mb-4", "p-3", "border", "rounded");
-        div.innerHTML = `<p class="fw-bold">${i + 1}. ${q.soal}</p>`;
+    const div = document.createElement("div");
+    div.classList.add("mb-3");
+    div.innerHTML = `<p class="fw-bold">${node.soal}</p>`;
 
-        q.pilihan.forEach((opt, j) => {
-            div.innerHTML += `
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="soal${i}" id="soal${i}_pilihan${j}" value='${JSON.stringify(opt.poin)}' required>
-                    <label class="form-check-label" for="soal${i}_pilihan${j}">${opt.jawaban}</label>
-                </div>`;
-        });
-
-        container.appendChild(div);
-    });
-}
-
-function hitungDiagnosa() {
-    const radios = document.querySelectorAll("input[type='radio']:checked");
-    const totalSoal = document.querySelectorAll('[id^="soal"]').length / 4; // Asumsi 4 pilihan per soal
-
-    if (radios.length < totalSoal) {
-        alert(`Silakan jawab semua pertanyaan terlebih dahulu. Masih ada ${totalSoal - radios.length} pertanyaan yang belum dijawab.`);
-        return;
-    }
-
-    let hasil = { ...hasilPoin };
-
-    radios.forEach(r => {
-        try {
-            const poin = JSON.parse(r.value);
-            for (let key in poin) {
-                if (hasil.hasOwnProperty(key)) {
-                    hasil[key] += poin[key];
+    node.pilihan.forEach((opt) => {
+        const button = document.createElement("button");
+        button.classList.add("btn", "btn-outline-primary", "d-block", "mb-2");
+        button.textContent = opt.jawaban;
+        button.onclick = () => {
+            for (let key in opt.poin) {
+                if (hasilPoin.hasOwnProperty(key)) {
+                    hasilPoin[key] += opt.poin[key];
                 }
             }
-        } catch (e) {
-            console.error("Error parsing radio value:", e);
-        }
+
+            if (opt.next) {
+                currentNode = opt.next;
+                renderNode(currentNode);
+            } else {
+                tampilkanHasil();
+            }
+        };
+        div.appendChild(button);
     });
+
+    container.appendChild(div);
+}
+
+function tampilkanHasil() {
+    const hasilDiv = document.getElementById("hasil");
+    hasilDiv.style.display = "block";
 
     let max = 0;
     let kerusakan = [];
-
-    for (let k in hasil) {
-        if (hasil[k] > max) {
-            max = hasil[k];
+    for (let k in hasilPoin) {
+        if (hasilPoin[k] > max) {
+            max = hasilPoin[k];
             kerusakan = [k];
-        } else if (hasil[k] === max && max > 0) {
+        } else if (hasilPoin[k] === max && max > 0) {
             kerusakan.push(k);
         }
     }
-
-    const estimasiBiaya = {
-        aki: 300000,
-        brush: 150000,
-        dinamo: 800000,
-        solenoid: 250000,
-        kabel: 100000,
-        sekring: 50000,
-        lilitan: 400000
-    };
 
     let hasilDiagnosis = "";
     if (max === 0) {
         hasilDiagnosis = "Tidak terdeteksi kerusakan yang spesifik berdasarkan jawaban Anda.";
     } else {
-        hasilDiagnosis = "Kemungkinan kerusakan pada:\n";
+        hasilDiagnosis = "Kemungkinan kerusakan pada:<br/>";
         kerusakan.forEach(k => {
-            hasilDiagnosis += `- ${k.charAt(0).toUpperCase() + k.slice(1)}`;
+            hasilDiagnosis += `- <strong>${namaKomponen[k] || k}</strong>`;
             if (estimasiBiaya[k]) {
-                hasilDiagnosis += `  | Estimasi biaya: Rp ${estimasiBiaya[k].toLocaleString('id-ID')}\n\n`;
+                hasilDiagnosis += ` | Estimasi biaya: <strong>Rp ${estimasiBiaya[k].toLocaleString('id-ID')}</strong><br/>`;
             }
         });
     }
 
-    document.getElementById("hasil").textContent = hasilDiagnosis;
+    hasilDiagnosis += `
+        <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-secondary" onclick="mulaiDiagnosis()">Mulai Ulang Diagnosis</button>
+            <a href="pesan.html" class="btn btn-success">Pesan Perbaikan →</a>
+        </div>
+    `;
+
+    hasilDiv.innerHTML = hasilDiagnosis;
+    hasilDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
-function loadQuestions() {
-    fetch("komponen/data/diagnosis.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
+function mulaiDiagnosis() {
+    resetPoin();
+
+    const container = document.getElementById("quiz-container");
+    container.innerHTML = "<div class='text-muted'>Memuat pertanyaan...</div>";
+
+    const hasilDiv = document.getElementById("hasil");
+    hasilDiv.innerHTML = "";
+    hasilDiv.style.display = "none";
+
+    fetch("coba.json")
+        .then(response => response.json())
         .then(data => {
-            console.log("Soal berhasil dimuat:", data);
-            renderSoal(data);
+            currentNode = data;
+            renderNode(currentNode);
         })
         .catch(error => {
-            console.error("Gagal memuat data soal dari server, menggunakan data fallback:", error);
-            renderSoal(fallbackData);
+            console.error("Gagal memuat data pohon diagnosis:", error);
+            container.innerHTML = `<div class='alert alert-danger'>Gagal memuat data.</div>`;
         });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    loadQuestions();
-});
+document.addEventListener("DOMContentLoaded", mulaiDiagnosis);

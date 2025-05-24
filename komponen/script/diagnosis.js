@@ -116,7 +116,7 @@ function mulaiDiagnosis() {
     hasilDiv.innerHTML = "";
     hasilDiv.style.display = "none";
 
-    fetch("diagnosis.json")
+    fetch("komponen/data/diagnosis.json")
         .then(response => response.json())
         .then(data => {
             currentNode = data;

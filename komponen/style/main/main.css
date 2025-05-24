@@ -92,9 +92,6 @@
     margin-top: -30px;
     padding-top: 10px;
 }
-.rating {
-    display: none;
-}
 
 @media (max-width: 1400px) {
     .text-tagline {
@@ -169,14 +166,15 @@
         vertical-align: middle;
         width: 90px;
     }  
+    .hero {
+        padding-bottom: 150px;
+    }
     .card-tagline {
-    margin-top: -50px;
+        margin-top: -90px;
     }
-    .card-detail {
-        display: none;
-    }
-    .rating {
-        display: block;
+    .list-content {
+        margin-top: -160px;
+        padding-top: 200px;
     }
 }
 @media (max-width: 390px) {

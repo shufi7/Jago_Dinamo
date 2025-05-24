@@ -1,0 +1,83 @@
+body {
+    background-color: #0A0F2C;
+}
+
+.login-admin {
+    margin-top: 2%;
+}
+
+.card-login {
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin: 0 30px 0 30px;
+}
+
+.logo {
+    width: 250px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.log-head {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.footer {
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.image-login {
+    width: 500px;
+    display: block;
+    margin: auto;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.form-control {
+    border: black 1px solid;
+}
+
+.btn {
+    background-color: #D4AF37;
+    color: white;
+}
+
+.small-text {
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .logo {
+        width: 170px;
+    }
+    .log-head {
+        font-size: 20px;
+    }
+    .image-login {
+        width: 300px;
+    }
+    .login-admin{
+        margin-top: -100px;
+    }
+}
+
+@media (max-width: 500px) {
+    .image-login {
+        display: none;
+    }
+    .login-admin {
+        margin-top: 30px;
+    }
+    .logo {
+        width: 100px;
+    }
+}

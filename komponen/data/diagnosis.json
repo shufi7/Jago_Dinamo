@@ -1,74 +1,196 @@
-[
-  {
-    "soal": "Apakah dinamo starter berputar dengan lambat saat menyalakan mobil?",
-    "pilihan": [
-      { "jawaban": "Ya, sangat lambat", "poin": { "aki": 1, "brush": 1 } },
-      { "jawaban": "Lambat tapi masih bisa", "poin": { "aki": 1 } },
-      { "jawaban": "Normal", "poin": {} },
-      { "jawaban": "Tidak berputar sama sekali", "poin": { "dinamo": 2 } }
-    ]
-  },
-  {
-    "soal": "Apakah terdengar suara klik saat kunci kontak diputar?",
-    "pilihan": [
-      { "jawaban": "Ya, tapi tidak menyala", "poin": { "solenoid": 2 } },
-      { "jawaban": "Klik berkali-kali", "poin": { "aki": 1 } },
-      { "jawaban": "Tidak ada suara", "poin": { "kabel": 1 } },
-      { "jawaban": "Langsung menyala", "poin": {} }
-    ]
-  },
-  {
-    "soal": "Apakah lampu dashboard redup saat mencoba menyalakan?",
-    "pilihan": [
-      { "jawaban": "Ya, sangat redup", "poin": { "aki": 2 } },
-      { "jawaban": "Sedikit redup", "poin": { "aki": 1 } },
-      { "jawaban": "Tetap terang", "poin": {} },
-      { "jawaban": "Tidak menyala sama sekali", "poin": { "sekring": 1 } }
-    ]
-  },
-  {
-    "soal": "Apakah pernah mencium bau terbakar dari mesin saat menyalakan?",
-    "pilihan": [
-      { "jawaban": "Ya, sering", "poin": { "lilitan": 2 } },
-      { "jawaban": "Kadang-kadang", "poin": { "lilitan": 1 } },
-      { "jawaban": "Tidak pernah", "poin": {} },
-      { "jawaban": "Tidak yakin", "poin": {} }
-    ]
-  },
-  {
-    "soal": "Apakah dinamo terdengar mendengung tetapi mesin tidak menyala?",
-    "pilihan": [
-      { "jawaban": "Ya, sering terjadi", "poin": { "brush": 2 } },
-      { "jawaban": "Kadang-kadang", "poin": { "brush": 1 } },
-      { "jawaban": "Tidak pernah", "poin": {} },
-      { "jawaban": "Tidak tahu", "poin": {} }
-    ]
-  },
-  {
-    "soal": "Apakah terdapat kabel yang terlihat meleleh atau terbakar?",
-    "pilihan": [
-      { "jawaban": "Ya, jelas terlihat", "poin": { "kabel": 2 } },
-      { "jawaban": "Sedikit saja", "poin": { "kabel": 1 } },
-      { "jawaban": "Tidak ada", "poin": {} },
-      { "jawaban": "Belum diperiksa", "poin": {} }
-    ]
-  },
-  {
-    "soal": "Apakah suara starter terdengar berat dan lambat?",
-    "pilihan": [
-      { "jawaban": "Ya, berat sekali", "poin": { "dinamo": 2 } },
-      { "jawaban": "Agak berat", "poin": { "dinamo": 1 } },
-      { "jawaban": "Normal", "poin": {} },
-      { "jawaban": "Tidak terdengar suara", "poin": { "solenoid": 1 } }
-    ]
-  },
-  {
-    "soal": "Apakah fuse atau sekring pernah putus saat starter digunakan?",
-    "pilihan": [
-      { "jawaban": "Ya, sering putus", "poin": { "sekring": 2 } },
-      { "jawaban": "Pernah sekali dua kali", "poin": { "sekring": 1 } },
-      { "jawaban": "Tidak pernah", "poin": {} },
-      { "jawaban": "Tidak yakin", "poin": {} }
-    ]
-  }
-]
+{
+  "soal": "Pilih jenis kerusakan yang ingin Anda diagnosis:",
+  "pilihan": [
+    {
+      "jawaban": "Dinamo Starter",
+      "poin": {},
+      "next": {
+        "soal": "Apakah dinamo starter berputar dengan lambat saat menyalakan mobil?",
+        "pilihan": [
+          {
+            "jawaban": "Ya, sangat lambat",
+            "poin": {
+              "aki": 1,
+              "brush": 1
+            },
+            "next": {
+              "soal": "Apakah terdengar suara klik saat kunci kontak diputar?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya, tapi tidak menyala",
+                  "poin": {
+                    "solenoid": 2
+                  }
+                },
+                {
+                  "jawaban": "Klik berkali-kali",
+                  "poin": {
+                    "aki": 1
+                  }
+                },
+                {
+                  "jawaban": "Tidak ada suara",
+                  "poin": {
+                    "kabel": 1
+                  }
+                },
+                {
+                  "jawaban": "Langsung menyala",
+                  "poin": {}
+                }
+              ]
+            }
+          },
+          {
+            "jawaban": "Lambat tapi masih bisa",
+            "poin": {
+              "aki": 1
+            },
+            "next": {
+              "soal": "Apakah lampu dashboard redup saat mencoba menyalakan?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya, sangat redup",
+                  "poin": {
+                    "aki": 2
+                  }
+                },
+                {
+                  "jawaban": "Sedikit redup",
+                  "poin": {
+                    "aki": 1
+                  }
+                },
+                {
+                  "jawaban": "Tetap terang",
+                  "poin": {}
+                },
+                {
+                  "jawaban": "Tidak menyala sama sekali",
+                  "poin": {
+                    "sekring": 1
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "jawaban": "Normal",
+            "poin": {},
+            "next": {
+              "soal": "Apakah fuse atau sekring pernah putus saat starter digunakan?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya, sering putus",
+                  "poin": {
+                    "sekring": 2
+                  }
+                },
+                {
+                  "jawaban": "Pernah sekali dua kali",
+                  "poin": {
+                    "sekring": 1
+                  }
+                },
+                {
+                  "jawaban": "Tidak pernah",
+                  "poin": {}
+                }
+              ]
+            }
+          },
+          {
+            "jawaban": "Tidak berputar sama sekali",
+            "poin": {
+              "dinamo": 2
+            },
+            "next": {
+              "soal": "Apakah suara starter terdengar berat dan lambat?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya, berat sekali",
+                  "poin": {
+                    "dinamo": 2
+                  }
+                },
+                {
+                  "jawaban": "Agak berat",
+                  "poin": {
+                    "dinamo": 1
+                  }
+                },
+                {
+                  "jawaban": "Normal",
+                  "poin": {}
+                },
+                {
+                  "jawaban": "Tidak terdengar suara",
+                  "poin": {
+                    "solenoid": 1
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "jawaban": "Dinamo Isi",
+      "poin": {},
+      "next": {
+        "soal": "Apakah indikator aki di dashboard menyala terus saat mesin hidup?",
+        "pilihan": [
+          {
+            "jawaban": "Ya",
+            "poin": {
+              "lilitan": 2,
+              "sekring": 1
+            },
+            "next": {
+              "soal": "Apakah terjadi suara berdengung saat mesin menyala?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya",
+                  "poin": {
+                    "lilitan": 2
+                  }
+                },
+                {
+                  "jawaban": "Tidak",
+                  "poin": {}
+                }
+              ]
+            }
+          },
+          {
+            "jawaban": "Tidak",
+            "poin": {},
+            "next": {
+              "soal": "Apakah kendaraan susah hidup setelah semalaman tidak digunakan?",
+              "pilihan": [
+                {
+                  "jawaban": "Ya, sering terjadi",
+                  "poin": {
+                    "aki": 1,
+                    "lilitan": 1
+                  }
+                },
+                {
+                  "jawaban": "Kadang-kadang",
+                  "poin": {
+                    "aki": 1
+                  }
+                },
+                {
+                  "jawaban": "Tidak pernah",
+                  "poin": {}
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

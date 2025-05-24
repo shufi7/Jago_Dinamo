@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Navbar Home Page*/
+/* Background dan padding navbar */
+* {
+    font-family: 'Poppins', sans-serif;
+}
 body {
     background-color: #0A0F2C;
 }
@@ -63,10 +70,7 @@ body {
         font-size: 20px;
     }
     .image-login {
-        width: 300px;
-    }
-    .login-admin{
-        margin-top: -100px;
+        display: none;
     }
 }
 
@@ -78,6 +82,9 @@ body {
         margin-top: 30px;
     }
     .logo {
-        width: 0px;
+        width: 100px;
+    }
+    .log-head {
+        font-size: 20px;
     }
 }

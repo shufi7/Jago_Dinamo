@@ -100,19 +100,16 @@
 }
 .content {
     background-color: #0A0F2C;
-    margin: 1px;
+    margin: 10px;
     border-radius: 20px;
 }
 .image-content {
     width: 100%;
 }
-.title-content {
-    font-size: 25px;
-    font-weight: bold;
-}
 .descript-content {
     font-size: 15px;
     margin: 0 30px;
+    padding-top: 20px;
 }
 .btn-content {
     background-color: #ffffff;
@@ -172,8 +169,11 @@
         vertical-align: middle;
         width: 130px;
     }
+    .text-content {
+        padding-top: 120px;
+    }
     .descript-content {
-        font-size: 10px;
+        font-size: 12px;
     }
 }
 

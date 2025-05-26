@@ -103,8 +103,14 @@
     margin: 10px;
     border-radius: 20px;
 }
+.text-list-content {
+    font-size: 25px;
+}
 .image-content {
     width: 100%;
+}
+.image-content-mobile {
+    display:none ;
 }
 .descript-content {
     font-size: 15px;
@@ -186,8 +192,12 @@
         vertical-align: middle;
         width: 120px;
     }   
+    .card-content {
+        align-items: center;
+        width: 100%;
+        margin-top: -240px;
+    }
 }
-
 @media (max-width: 500px) {
     .tagline {
         margin-top: -50px;
@@ -211,6 +221,9 @@
     .text-content {
         margin-top: -160px;
         padding-top: 200px;
+    }
+    .text-list-content {
+        font-size: 20px;
     }
 }
 @media (max-width: 390px) {

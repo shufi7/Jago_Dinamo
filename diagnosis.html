@@ -20,11 +20,14 @@
         }
 
         body {
-            background-color: #f3f4f6;
+            background-color: #0A0F2C; 
+            color: #f8f9fa; 
         }
 
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #212529; 
+            color: #f8f9fa; 
         }
 
         .question-container {
@@ -36,7 +39,31 @@
             padding: 1rem;
             border-top: 1px solid #ddd;
             text-align: center;
+            color: #212529; 
         }
+
+        .text-primary { 
+            color: #D4AF37 !important; 
+        }
+
+        .btn-outline-primary { 
+            color: #D4AF37;
+            border-color: #D4AF37;
+        }
+        .btn-outline-primary:hover {
+            color: #0A0F2C;
+            background-color: #D4AF37;
+            border-color: #D4AF37;
+        }
+
+        .bg-light { 
+            background-color: #343a40 !important; 
+            color: #f8f9fa;
+        }
+        .border.rounded {
+            border-color: #495057 !important;
+        }
+
     </style>
 </head>
 
@@ -55,7 +82,7 @@
                         class="img-fluid mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Petunjuk</h5>
+                            <h5 class="card-title text-primary">Petunjuk</h5>
                             <p class="card-text">Jawab pertanyaan berdasarkan kondisi kendaraan Anda secara bertahap
                                 untuk mendapatkan diagnosis awal dan estimasi biaya.</p>
                         </div>
@@ -65,14 +92,14 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="card">
                         <div class="card-body question-container">
-                            <h2 class="card-title">Form Diagnosis</h2>
+                            <h2 class="card-title text-primary">Form Diagnosis</h2>
                             <div id="quiz-container"></div>
                         </div>
                     </div>
 
                     <div class="card mt-4">
                         <div class="card-body">
-                            <h4 class="card-title">Hasil Diagnosis:</h4>
+                            <h4 class="card-title text-primary">Hasil Diagnosis:</h4>
                             <div id="hasil" class="bg-light p-3 border rounded" style="display: none;"></div>
                         </div>
                     </div>

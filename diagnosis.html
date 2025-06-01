@@ -28,7 +28,7 @@
 
         .page-title-container {
             background-color: rgba(10, 15, 44, 0.85);
-            padding: 1.5rem 0;
+            padding: 1.5rem 1rem; 
             margin-bottom: 2rem;
             border-bottom: 1px solid #D4AF37;
         }
@@ -36,26 +36,29 @@
         .page-title-container h1 {
              color: #D4AF37;
              font-weight: 600;
+             font-size: 2.25rem; 
         }
 
         .card {
             background-color: #0d0f2b; 
             color: #f8f9fa;
             border: 1px solid #D4AF37; 
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.08); 
             border-radius: .35rem; 
         }
         
         .card-title {
              color: #D4AF37; 
+             font-size: 1.35rem; 
         }
 
         .card-body p, .card-body div, #quiz-container p, .card-text {
             color: #e9ecef; 
+            font-size: 0.95rem; 
         }
         #quiz-container p.fw-bold { 
             color: #f8f9fa; 
-            font-size: 1.1rem;
+            font-size: 1.05rem; 
             margin-bottom: 1rem;
         }
         
@@ -66,6 +69,7 @@
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
             text-align: left; 
             padding: 0.5rem 1rem; 
+            font-size: 0.9rem; 
         }
         #quiz-container .btn:hover {
             color: #0A0F2C; 
@@ -76,40 +80,54 @@
         #hasil-container {
             margin-top: 2rem; 
         }
+        #hasil-container.card {
+             border-top: 2px solid #D4AF37; 
+        }
 
         #hasil {
             color: #f8f9fa;
         }
         #hasil ul {
-            padding-right: 0; 
             padding-left: 0; 
             list-style-type: none;
             margin-bottom: 1rem;
         }
         #hasil ul li {
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255,255,255,0.03); 
             padding: 0.75rem 1rem;
             border-radius: .25rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; 
             border-left: 3px solid #D4AF37;
         }
         #hasil strong {
             color: #D4AF37; 
         }
          #hasil .small {
-            font-size: 0.8em;
+            font-size: 0.85em; 
             color: #adb5bd;
         }
         #hasil .small strong {
-            color: #D4AF37;
+            color: #D4AF37; 
         }
         #hasil .text-muted {
-            color: #adb5bd !important; 
+            color: #8b949e !important; 
+        }
+
+        #hasil .btn-actions-container { 
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-between; 
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #495057;
         }
 
         #hasil .btn {
             font-weight: bold;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem; 
+            flex-grow: 1; 
+            margin: 0.25rem; 
         }
         #hasil .btn-secondary { 
             background-color: #6c757d;
@@ -131,9 +149,9 @@
         }
         
         .img-diagnosa {
-            background-color: transparent; 
+            background-color: rgba(255, 255, 255, 0.03); 
             object-fit: contain; 
-            max-height: 200px; 
+            max-height: 220px; 
             border-radius: .25rem .25rem 0 0; 
         }
 
@@ -150,10 +168,111 @@
         }
         #hasil-container:not(.show) {
             opacity: 0;
+            display: none; 
         }
         #hasil-container.show {
             opacity: 1;
-            display: block;
+            display: block; 
+        }
+
+    
+        @media (max-width: 991.98px) {
+            .page-title-container h1 {
+                font-size: 2rem; 
+            }
+            .card-title {
+                font-size: 1.25rem;
+            }
+             #quiz-container p.fw-bold {
+                font-size: 1rem;
+            }
+            #quiz-container .btn {
+                font-size: 0.9rem;
+                padding: 0.45rem 0.9rem;
+            }
+            .img-diagnosa {
+                max-height: 200px;
+            }
+            .col-lg-4.col-md-12, .col-lg-8.col-md-12 { 
+                 margin-bottom: 1.5rem;
+            }
+            .col-lg-4.col-md-12:last-child, .col-lg-8.col-md-12:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+       
+        @media (max-width: 767.98px) {
+            .page-title-container {
+                padding: 1rem 0.75rem; 
+                margin-bottom: 1.5rem;
+            }
+            .page-title-container h1 {
+                font-size: 1.65rem; 
+            }
+            .container.py-4 { 
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.75rem !important;
+            }
+            .card-title {
+                font-size: 1.1rem;
+            }
+            .card-body p, .card-body div, #quiz-container p, .card-text {
+                font-size: 0.9rem;
+            }
+             #quiz-container p.fw-bold {
+                font-size: 0.95rem;
+            }
+            #quiz-container .btn {
+                font-size: 0.875rem;
+                padding: 0.5rem 0.75rem; 
+            }
+            .img-diagnosa {
+                max-height: 160px; 
+            }
+             #hasil .btn-actions-container {
+                flex-direction: column; 
+            }
+            #hasil .btn {
+                width: 100%; 
+                margin-bottom: 0.75rem; 
+            }
+            #hasil .btn:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .page-title-container h1 {
+                font-size: 1.45rem;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+             #quiz-container p.fw-bold {
+                font-size: 0.9rem;
+            }
+            #quiz-container .btn {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.7rem;
+            }
+            .img-diagnosa {
+                max-height: 140px;
+            }
+            #hasil {
+                padding: 1rem !important; 
+            }
+            #hasil ul li {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            #hasil .small {
+                font-size: 0.8em;
+            }
+            #hasil .btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
@@ -197,8 +316,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-12">
                     <div class="card mb-4"> 
-                        <img src="komponen/image/diagnosiss.png" alt="Gambar Diagnosa Jago Dinamo"
-                            class="card-img-top img-diagnosa p-3">
+                        <img src="komponen/image/diagnosiss.png" alt="Gambar Diagnosa Jago Dinamo" class="card-img-top img-diagnosa p-3">
                         <div class="card-body">
                             <h5 class="card-title">Petunjuk Penggunaan</h5>
                             <p class="card-text">Jawablah serangkaian pertanyaan berikut sesuai dengan gejala atau masalah yang Anda alami pada dinamo kendaraan Anda. Jawaban Anda akan membantu kami memberikan diagnosis awal.</p>

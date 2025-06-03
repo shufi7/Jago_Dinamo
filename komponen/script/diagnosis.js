@@ -104,7 +104,7 @@ function tampilkanHasil() {
     hasilDiagnosisHTML += `
         <div class="d-flex justify-content-center justify-content-md-between flex-wrap mt-4 pt-3 border-top" style="border-color: #495057 !important;">
             <button class="btn btn-secondary mb-2 mb-md-0 me-md-2" onclick="mulaiDiagnosis()"><i class="bi bi-arrow-clockwise"></i> Mulai Ulang Diagnosis</button>
-            <a href="pesan.html" class="btn btn-success"><i class="bi bi-cart-check"></i> Lanjut ke Pemesanan</a>
+            <a href="pemesanan.html" class="btn btn-success"><i class="bi bi-cart-check"></i> Lanjut ke Pemesanan</a>
         </div>
     `;
     hasilDiv.innerHTML = hasilDiagnosisHTML;

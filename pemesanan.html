@@ -1,11 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pemesanan Layanan - JagoDinamoId</title>
+    <link href="komponen/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/komponen/style/main/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #0A0F2C;
+            color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+
+        .page-title-container {
+            background-color: rgba(10, 15, 44, 0.85);
+            padding: 1.5rem 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #D4AF37;
+        }
+
+        .page-title-container h1 {
+             color: #D4AF37;
+             font-weight: 600;
+             font-size: 2.25rem;
+        }
+
+        .form-label {
+            color: #D4AF37;
+            font-weight: 500;
+        }
+        .form-control,
+        .form-select {
+            background-color: #212529;
+            color: #f8f9fa;
+            border-color: #495057;
+        }
+        .form-control::placeholder {
+            color: #6c757d;
+        }
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #2c3034;
+            color: #f8f9fa;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23D4AF37' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        }
+        .card {
+            background-color: #0d0f2b; 
+            color: #f8f9fa;
+            border: 1px solid #D4AF37;
+             border-radius: .35rem; 
+        }
+        .card-header {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid #D4AF37;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+        .card-title {
+             color: #D4AF37; 
+        }
+        .btn-primary {
+            background-color: #D4AF37;
+            border-color: #D4AF37;
+            color: #0A0F2C;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #c09b2e;
+            border-color: #b0902a;
+            color: #0A0F2C;
+        }
+
+        footer {
+            background-color: #0A0F2C; 
+            padding: 1.5rem 0;
+            border-top: 1px solid #D4AF37; 
+            color: #adb5bd; 
+            text-align: center;
+            margin-top: auto;
+        }
+
+        @media (max-width: 767.98px) {
+            .page-title-container h1 {
+                font-size: 1.75rem;
+            }
+            .form-label, .form-control, .form-select, .btn {
+                font-size: 0.95rem;
+            }
+        }
+         @media (max-width: 575.98px) {
+            .page-title-container h1 {
+                font-size: 1.5rem;
+            }
+             .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+             }
+             .btn:last-child {
+                 margin-bottom: 0;
+             }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand d-flex align-items-center text-white" href="home.html">
+                <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
+            </a>
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavPemesanan">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavPemesanan">
+                <ul class="navbar-nav ms-auto text-end">
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="diagnosis.html">Diagnosis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="#">Periksa Progres Perbaikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pesan.html" class="btn order-button mt-2 mt-lg-0 active">Order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="page-title-container">
+            <div class="container">
+                <div class="text-center">
+                    <h1>Formulir Pemesanan Layanan</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="card">
+                        <div class="card-header">
+                            Detail Pemesanan
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="formPemesanan">
+                                <h5 class="card-title mb-3">Data Diri Pelanggan</h5>
+                                <div class="mb-3">
+                                    <label for="namaPelanggan" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="namaPelanggan" placeholder="Masukkan nama lengkap Anda" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nomorTelepon" class="form-label">Nomor Telepon/WA</label>
+                                    <input type="tel" class="form-control" id="nomorTelepon" placeholder="Contoh: 081234567890" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamatPelanggan" class="form-label">Alamat Lengkap</label>
+                                    <textarea class="form-control" id="alamatPelanggan" rows="3" placeholder="Masukkan alamat lengkap untuk kunjungan teknisi" required></textarea>
+                                </div>
+
+                                <h5 class="card-title mt-4 mb-3">Detail Kendaraan & Keluhan</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="jenisKendaraan" class="form-label">Jenis Kendaraan</label>
+                                        <input type="text" class="form-control" id="jenisKendaraan" placeholder="Contoh: Mobil Toyota Avanza 2018">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nomorPolisi" class="form-label">Nomor Polisi</label>
+                                        <input type="text" class="form-control" id="nomorPolisi" placeholder="Contoh: DA 1234 XYZ">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="keluhan" class="form-label">Deskripsi Keluhan</label>
+                                    <textarea class="form-control" id="keluhan" rows="4" placeholder="Jelaskan keluhan atau masalah pada dinamo Anda..." required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hasilDiagnosis" class="form-label">Komponen Rusak (Berdasarkan Diagnosis Awal)</label>
+                                    <input type="text" class="form-control" id="hasilDiagnosis" placeholder="Contoh: Aki, Dinamo Starter (Opsional)">
+                                    <div class="form-text text-light">Jika Anda telah melakukan diagnosis awal, masukkan komponen yang terindikasi rusak.</div>
+                                </div>
+
+                                <h5 class="card-title mt-4 mb-3">Jadwal Kunjungan Teknisi</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan</label>
+                                        <input type="date" class="form-control" id="tanggalKunjungan" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="waktuKunjungan" class="form-label">Preferensi Waktu</label>
+                                        <select class="form-select" id="waktuKunjungan" required>
+                                            <option selected disabled value="">Pilih waktu...</option>
+                                            <option value="pagi">Pagi (08:00 - 11:00)</option>
+                                            <option value="siang">Siang (13:00 - 16:00)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">Kirim Permintaan Servis</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="mb-0">&copy; 2025 JagoDinamo.Id - Solusi Dinamo Anda</p>
+    </footer>
+
+    <script src="komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="komponen/script/pemesanan.js" defer></script>
 </body>
 </html>

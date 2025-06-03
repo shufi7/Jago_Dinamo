@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 /* Navbar Home Page*/
 /* Background dan padding navbar */
 * {
     font-family: 'Poppins', sans-serif;
+}
+
+.navbar-utama {
+    margin: 0;
 }
 
 .custom-navbar {
@@ -63,6 +66,9 @@
     background-color: #0A0F2C;
 }
 
+.tagline {
+    margin-top: -10px;
+}
 .text-main-tagline {
     color: #D4AF37;
     font-weight: 600;

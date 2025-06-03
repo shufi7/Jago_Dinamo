@@ -2,16 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/komponen/style/main/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/komponen/style/main/main.css" />
+    <style>
+        body {
+            padding-top: 80px;
+            /* Sesuaikan dengan tinggi navbar */
+        }
+
+        .shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
     <title>Document</title>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg custom-navbar">
+    <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama">
         <div class="container-fluid d-flex justify-content-between">
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center text-white" href="#">
@@ -41,7 +51,6 @@
         </div>
     </nav>
 
-
     <!-- Tagline Content -->
     <section class="hero text-white text-center tagline">
         <div class="container col-12 py-5">
@@ -49,7 +58,7 @@
                 <span class="text-main-tagline">JagoDinamo.Id</span>
                 <img src="/komponen/image/dinamomobil.jpg" alt="gear" class="mx-1 dinamo" />
                 The solution
-                <br>to all
+                <br />to all
                 <img src="/komponen/image/Gear.png" alt="gear" class="mx-1 gear" />
                 your car problems.
             </p>
@@ -84,11 +93,11 @@
                 Periksa Kerusakan mobilmu, dan perbaiki di JagoDinamo.Id
             </p>
         </div>
-        <div class=" container card-content d-flex justify-content-center align-items-center">
+        <div class="container card-content d-flex justify-content-center align-items-center">
             <div class="row text-center">
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card content content-diagnosis text-white d-flex flex-column">
-                        <img src="/komponen/image/diagnosis.png" alt="" class="image-content">
+                        <img src="/komponen/image/diagnosis.png" alt="" class="image-content" />
                         <p class="descript-content text-center">
                             Kami akan membantu menganalisis apa saja yang mungkin harus diperbaiki.
                         </p>
@@ -97,18 +106,18 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card content text-white d-flex flex-column">
-                        <img src="/komponen/image/order.png" alt="" class="image-content">
+                        <img src="/komponen/image/order.png" alt="" class="image-content" />
                         <p class="descript-content text-center">
                             Teknisi kami akan datang ke lokasi anda, dan memperbaikinya ditempat anda.
                         </p>
-                        <a href="" class="btn btn-content mt-4 mb-4">order</a>
+                        <a href="" class="btn btn-content mt-4 mb-4">Order</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card content text-white d-flex flex-column">
-                        <img src="/komponen/image/progres.png" alt="" class="image-content">
+                        <img src="/komponen/image/progres.png" alt="" class="image-content" />
                         <p class="descript-content text-center">
-                            Gak harus kebengkel lagi! Periksa progres perbaikan mobilmu disini, klik tombolnyaaa! 
+                            Gak harus kebengkel lagi! Periksa progres perbaikan mobilmu disini, klik tombolnyaaa!
                         </p>
                         <a href="" class="btn btn-content mt-4 mb-4">Periksa</a>
                     </div>
@@ -119,29 +128,44 @@
 
     <section class="profile mt-5">
         <div class="profile-title">
-            <h1 class="head-title text-center">
-                Profile Perusahaan
-            </h1>
+            <h1 class="head-title text-center">Profile Perusahaan</h1>
             <div class="row container text-sm-end">
                 <div class="col-lg-6">
-                    <img class="bengkelshufi" src="/komponen/image/bengkelshufi.jpg" alt="bengkel">
+                    <img class="bengkelshufi" src="/komponen/image/bengkelshufi.jpg" alt="bengkel" />
                 </div>
                 <div class="col-lg-6">
                     <p class="text-profile">
                         Didirikan oleh bapak <b>Muhammad Johannes Robar</b> pada tahun 2014
-                        Beliau dulunya karyawan bengkel di suatu tempat service mobil dan memutuskan berhenti kemudian membuka bengkelnya sendiri
-                        bengkel ini di khususkan untuk spesialis perbaikan dinamo mobil, segala masalah dinamo mobil bisa diperbaiki disini.
-                    <br>Bengkel jago dinamo bertempat di jl. ayani km. 8</p>
+                        Beliau dulunya karyawan bengkel di suatu tempat service mobil dan memutuskan berhenti kemudian
+                        membuka
+                        bengkelnya sendiri
+                        bengkel ini di khususkan untuk spesialis perbaikan dinamo mobil, segala masalah dinamo mobil
+                        bisa
+                        diperbaiki disini.
+                        <br />Bengkel jago dinamo bertempat di jl. ayani km. 8
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
     <footer>
         <div class="text-center mt-5 mb-5">
             All Rights Reserved. Copyright By JagoDinamo.Id
         </div>
     </footer>
+
     <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("shadow");
+            } else {
+                navbar.classList.remove("shadow");
+            }
+        });
+    </script>
 </body>
 
 </html>

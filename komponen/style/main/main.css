@@ -129,6 +129,13 @@
     background-color: #bababa;
 }
 
+.text-profile {
+    text-align: justify;
+}
+.bengkelshufi {
+    width: 400px;
+}
+
 @media (max-width: 1400px) {
     .text-tagline {
         font-size: 60px;

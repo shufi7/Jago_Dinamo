@@ -5,6 +5,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    padding-top: 80px;
+    /* Sesuaikan dengan tinggi navbar */
+}
+.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-utama {
     margin: 0;
 }
@@ -135,11 +143,33 @@
     background-color: #bababa;
 }
 
-.text-profile {
-    text-align: justify;
+.saran {
+    background-color: #f5f5fc;
 }
-.bengkelshufi {
-    width: 400px;
+.description-saran {
+    font-size: 20px;
+}
+.instagram-btn {
+    background-color: #0A0F2C;
+    padding: 5px 30px;
+    border-radius: 7px;
+}
+
+.footer-home {
+    margin-bottom: -15px;
+    background-color: #0A0F2C;
+    padding-top: 15px;
+}
+.copyright-footer {
+    background-color: #D4AF37;
+}
+.head-footer {
+    color: #D4AF37;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.descript-footer {
+    font-size: 12px;
 }
 
 @media (max-width: 1400px) {
@@ -194,6 +224,18 @@
     .descript-content {
         font-size: 12px;
     }
+    .saran-poto {
+        width: 250px;
+    }
+    .description-saran {
+        font-size: 11px;
+    }
+    .title-saran {
+        font-size: 20px;
+    }
+    .instagram-btn {
+        font-size: 13px;
+    }
 }
 
 
@@ -237,6 +279,13 @@
     }
     .text-list-content {
         font-size: 20px;
+    }
+    .description-saran {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .copyright {
+        font-size: 12px;
     }
 }
 @media (max-width: 390px) {

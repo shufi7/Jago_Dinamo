@@ -6,15 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/komponen/style/main/main.css" />
-    <style>
-        body {
-            padding-top: 80px;
-            /* Sesuaikan dengan tinggi navbar */
-        }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-        .shadow {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    <style>
+
     </style>
     <title>Document</title>
 </head>
@@ -38,13 +33,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-end">
                     <li class="nav-item">
-                        <a class="nav-link me-lg-4 button-text text-white" href="#">Diagnosis</a>
+                        <a class="nav-link me-lg-4 button-text text-white" href="/diagnosis.html">Diagnosis</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link me-lg-4 button-text text-white" href="#">Periksa Progres Perbaikan</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="btn order-button mt-2 mt-lg-0">Order</a>
+                        <a href="/pemesanan.html" class="btn order-button mt-2 mt-lg-0">Order</a>
                     </li>
                 </ul>
             </div>
@@ -101,7 +96,7 @@
                         <p class="descript-content text-center">
                             Kami akan membantu menganalisis apa saja yang mungkin harus diperbaiki.
                         </p>
-                        <a href="" class="btn btn-content mt-4 mb-4">Diagnosis</a>
+                        <a href="/diagnosis.html" class="btn btn-content mt-4 mb-4">Diagnosis</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -110,7 +105,7 @@
                         <p class="descript-content text-center">
                             Teknisi kami akan datang ke lokasi anda, dan memperbaikinya ditempat anda.
                         </p>
-                        <a href="" class="btn btn-content mt-4 mb-4">Order</a>
+                        <a href="/pemesanan.html" class="btn btn-content mt-4 mb-4">Order</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -126,32 +121,70 @@
         </div>
     </section>
 
-    <section class="profile mt-5">
-        <div class="profile-title">
-            <h1 class="head-title text-center">Profile Perusahaan</h1>
-            <div class="row container text-sm-end">
-                <div class="col-lg-6">
-                    <img class="bengkelshufi" src="/komponen/image/bengkelshufi.jpg" alt="bengkel" />
-                </div>
-                <div class="col-lg-6">
-                    <p class="text-profile">
-                        Didirikan oleh bapak <b>Muhammad Johannes Robar</b> pada tahun 2014
-                        Beliau dulunya karyawan bengkel di suatu tempat service mobil dan memutuskan berhenti kemudian
-                        membuka
-                        bengkelnya sendiri
-                        bengkel ini di khususkan untuk spesialis perbaikan dinamo mobil, segala masalah dinamo mobil
-                        bisa
-                        diperbaiki disini.
-                        <br />Bengkel jago dinamo bertempat di jl. ayani km. 8
-                    </p>
-                </div>
+    <section class="saran">
+        <div class="container row mt-3 align-items-center justify-content-center vw-100 ">
+            <div class="image-saran col-md-6 col-sm-12 text-center">
+                <img src="/komponen/image/keluhandansaran.png" alt="saran" class="saran-poto" width="400px">
+            </div>
+            <div class="description-saran col-md-6  col-sm-12">
+                <h1 class="title-saran ">
+                    Saran dan Masukkan
+                </h1>
+                Kamu punya saran dan masukkan tentang web ini ? <br>
+                yuu kontak kami, melalui email yang tertera, atau langsung tekan tombol ini,
+                untuk masuk ke instagram resmi kami yaaa. <br>
+                <a href="#" class="btn instagram-btn text-white mt-2">instagram</a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="text-center mt-5 mb-5">
-            All Rights Reserved. Copyright By JagoDinamo.Id
+    <footer class="footer-home text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Bengkel Jago Dinamo
+                    </p>
+                    <p class="descript-footer">
+                        Jl. A. Yani Km. 8, Banjarmasin <br>
+                        Kalimantan Selatan
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Jam Operasional
+                    </p>
+                    <p class="descript-footer">
+                        - Senin - Sabtu : 08.00 - 17.00 <br>
+                        - Minggu & Libur Nasional : Tutup
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Kontak
+                    </p>
+                    <p class="descript-footer">
+                        Email : jagodinamo@jdn.id <br>
+                        Telp/Wa : 0812 3456 7890
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Owner
+                    </p>
+                    <p class="descript-footer">
+                        Muhammad Johannes Robar <br>
+                        Jago Dinamo Since 2014
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-footer">
+            <div class="col-md-12">
+                <p class="copyright text-center">
+                    © 2025 JagoDinamo.Id. All rights reserved.
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -167,5 +200,4 @@
         });
     </script>
 </body>
-
 </html>

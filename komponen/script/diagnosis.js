@@ -1,4 +1,4 @@
-const estimasiBiaya = {
+let estimasiBiaya = {
     aki: 300000,
     brush: 150000,
     dinamo: 800000,
@@ -8,7 +8,7 @@ const estimasiBiaya = {
     lilitan: 400000
 };
 
-const namaKomponen = {
+let namaKomponen = {
     aki: "Aki",
     brush: "Brush Dinamo",
     dinamo: "Dinamo Starter",

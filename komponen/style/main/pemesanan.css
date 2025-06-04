@@ -1,0 +1,105 @@
+body {
+            background-color: #0A0F2C;
+            color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 1px;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+
+        .page-title-container {
+            background-color: rgba(10, 15, 44, 0.85);
+            padding: 1.5rem 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #D4AF37;
+        }
+
+        .page-title-container h1 {
+             color: #D4AF37;
+             font-weight: 600;
+             font-size: 2.25rem;
+        }
+
+        .form-label {
+            color: #D4AF37;
+            font-weight: 500;
+        }
+        .form-control,
+        .form-select {
+            background-color: #212529;
+            color: #f8f9fa;
+            border-color: #495057;
+        }
+        .form-control::placeholder {
+            color: #6c757d;
+        }
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #2c3034;
+            color: #f8f9fa;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23D4AF37' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        }
+        .card {
+            background-color: #0d0f2b; 
+            color: #f8f9fa;
+            border: 1px solid #D4AF37;
+             border-radius: .35rem; 
+        }
+        .card-header {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid #D4AF37;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+        .card-title {
+             color: #D4AF37; 
+        }
+        .btn-primary {
+            background-color: #D4AF37;
+            border-color: #D4AF37;
+            color: #0A0F2C;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #c09b2e;
+            border-color: #b0902a;
+            color: #0A0F2C;
+        }
+
+        footer {
+            background-color: #0A0F2C; 
+            padding: 1.5rem 0;
+            border-top: 1px solid #D4AF37; 
+            color: #adb5bd; 
+            text-align: center;
+            margin-top: auto;
+        }
+
+        @media (max-width: 767.98px) {
+            .page-title-container h1 {
+                font-size: 1.75rem;
+            }
+            .form-label, .form-control, .form-select, .btn {
+                font-size: 0.95rem;
+            }
+        }
+         @media (max-width: 575.98px) {
+            .page-title-container h1 {
+                font-size: 1.5rem;
+            }
+             .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+             }
+             .btn:last-child {
+                 margin-bottom: 0;
+             }
+        }

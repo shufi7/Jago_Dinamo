@@ -172,6 +172,10 @@ body {
     font-size: 12px;
 }
 
+.login-admin {
+    text-decoration: none;
+}
+
 @media (max-width: 1400px) {
     .text-tagline {
         font-size: 60px;

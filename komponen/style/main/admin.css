@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Navbar Home Page*/
+/* Background dan padding navbar */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-utama {
+    margin: 0;
+}
+
+.custom-navbar {
+    background-color: #0A0F2C;
+    padding: 5px 70px;
+}
+
+.logo-navbar {
+    width: 210px;
+}
+
+/* Link nav */
+.custom-navbar .nav-link {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.button-text {
+    color: #ffffff;
+}
+
+.button-text:hover {
+    color: #D4AF37;
+}
+
+/* Tombol Order */
+.custom-navbar {
+    background-color: #0d0f2b;
+    padding: 10px 20px;
+}
+
+.order-button {
+    background: #D4AF37;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 8px 20px;
+    border: none;
+    transition: 0.3s;
+}
+
+.order-button:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

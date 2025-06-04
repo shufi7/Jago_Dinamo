@@ -6,24 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/komponen/style/main/admin.css">
-    <title>Document</title>
+    <title>Admin - JagoDinamoId</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbdGGAw-MOYt1LuiQ6bGZqmXiBQH6wVk",
+            authDomain: "jagodinamodata.firebaseapp.com",
+            databaseURL: "https://jagodinamodata-default-rtdb.firebaseio.com",
+            projectId: "jagodinamodata",
+            storageBucket: "jagodinamodata.firebasestorage.app",
+            messagingSenderId: "1045178326640",
+            appId: "1:1045178326640:web:e3abf0380697b738481eb5",
+            measurementId: "G-4XBR0MDY7L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        window.firebaseDatabase = database;
+    </script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama">
         <div class="container-fluid d-flex justify-content-between">
-            <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center text-white" href="#">
                 <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
             </a>
-
-            <!-- Toggler (Kanan) -->
             <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Menu (Muncul Kanan di Mobile) -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-end">
                     <li class="nav-item">
@@ -49,37 +66,18 @@
                             <thead class="table-dark text-center">
                                 <tr>
                                     <th>Nama</th>
-                                    <th>Nomor Telp</th>
+                                    <th>Nomor Telepon</th>
                                     <th>Alamat</th>
-                                    <th>Kerusakan</th>
                                     <th>Kendaraan</th>
-                                    <th>Deskripsi</th>
+                                    <th>Deskripsi Keluhan</th>
+                                    <th>Komponen Rusak</th>
+                                    <th>Tanggal Kunjungan</th>
+                                    <th>Waktu Kunjungan</th>
                                     <th>Status</th>
-                                </tr>
+                                    <th>Aksi</th> </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Daud Al-Halil</td>
-                                    <td>0891 8882 8889</td>
-                                    <td>Jl. Bagian Jawa Taka Dalam, RT 10 No 083, Banjarbanar</td>
-                                    <td>Dinamo dalam bagian luar</td>
-                                    <td>Lamborghini</td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nam quod quisquam
-                                        cupiditate excepturi
-                                        maiores perferendis. Est laboriosam, laudantium at illo voluptates asperiores
-                                        beatae!
-                                    </td>
-                                    <td>
-                                        <select class="form-select">
-                                            <option value="disetujui">Disetujui</option>
-                                            <option value="tidak">Tidak Disetujui</option>
-                                            <option value="menunggu">Menunggu Disetujui</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <!-- Tambah baris lain di sini -->
-                            </tbody>
+                            <tbody id="orderTableBody">
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -88,7 +86,7 @@
     </section>
 
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/komponen/script/admin.js"></script>
+    <script src="/komponen/script/admin.js" type="module"></script>
     <script>
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");

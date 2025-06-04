@@ -9,6 +9,28 @@
     <link rel="stylesheet" href="/komponen/style/main/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/komponen/style/main/pemesanan.css">
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbdGGAw-MOYt1LuiQ6bGZqmXiBQH6wVk",
+            authDomain: "jagodinamodata.firebaseapp.com",
+            databaseURL: "https://jagodinamodata-default-rtdb.firebaseio.com",
+            projectId: "jagodinamodata",
+            storageBucket: "jagodinamodata.firebasestorage.app",
+            messagingSenderId: "1045178326640",
+            appId: "1:1045178326640:web:e3abf0380697b738481eb5",
+            measurementId: "G-4XBR0MDY7L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        window.firebaseDatabase = database;
+    </script>
 </head>
 
 <body>
@@ -118,6 +140,6 @@
     </footer>
 
     <script src="komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="komponen/script/pemesanan.js" defer></script>
+    <script src="komponen/script/pemesanan.js" type="module" defer></script>
 </body>
 </html>

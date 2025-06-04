@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/komponen/style/main/admin.css">
     <title>Document</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama">
         <div class="container-fluid d-flex justify-content-between">
@@ -37,7 +39,56 @@
             </div>
         </div>
     </nav>
+
+    <section class="table-admin text-black py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Nomor Telp</th>
+                                    <th>Alamat</th>
+                                    <th>Kerusakan</th>
+                                    <th>Kendaraan</th>
+                                    <th>Deskripsi</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Daud Al-Halil</td>
+                                    <td>0891 8882 8889</td>
+                                    <td>Jl. Bagian Jawa Taka Dalam, RT 10 No 083, Banjarbanar</td>
+                                    <td>Dinamo dalam bagian luar</td>
+                                    <td>Lamborghini</td>
+                                    <td>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nam quod quisquam
+                                        cupiditate excepturi
+                                        maiores perferendis. Est laboriosam, laudantium at illo voluptates asperiores
+                                        beatae!
+                                    </td>
+                                    <td>
+                                        <select class="form-select">
+                                            <option value="disetujui">Disetujui</option>
+                                            <option value="tidak">Tidak Disetujui</option>
+                                            <option value="menunggu">Menunggu Disetujui</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <!-- Tambah baris lain di sini -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/komponen/script/admin.js"></script>
     <script>
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
@@ -49,4 +100,5 @@
         });
     </script>
 </body>
+
 </html>

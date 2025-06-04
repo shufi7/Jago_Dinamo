@@ -4,6 +4,11 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+body {
+    padding-top: 80px;
+    background-color: #0A0F2C;
+    /* Sesuaikan dengan tinggi navbar */
+}
 .shadow {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -62,4 +67,82 @@
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.order-table {
+    border: #0d0f2b;
+}
+/* Tabel Admin */
+.table-admin {
+  background-color: #0A0F2C;
+  color: #fff;
+}
+
+/* Table style */
+.table-admin .table {
+  background-color: #0A0F2C;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #D4AF37;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header tabel */
+.table-admin .table thead {
+  background-color: #1c1f2f;
+  color: #D4AF37;
+}
+
+/* Header th */
+.table-admin .table thead th {
+  border-top: 1px solid #D4AF37;
+  border-bottom: 1px solid #D4AF37;
+  padding: 16px;
+  text-align: center;
+}
+
+/* Border samping header */
+.table-admin .table thead th:first-child {
+  border-left: 1px solid #D4AF37;
+  border-top-left-radius: 12px;
+}
+.table-admin .table thead th:last-child {
+  border-right: 1px solid #D4AF37;
+  border-top-right-radius: 12px;
+}
+
+/* Isi tabel */
+.table-admin .table tbody td {
+  background-color: #0A0F2C;
+  color: #fff;
+  border-top: 1px solid #D4AF37;
+  border-bottom: 1px solid #D4AF37;
+  padding: 16px;
+  vertical-align: middle;
+}
+
+/* Border samping isi */
+.table-admin .table tbody td:first-child {
+  border-left: 1px solid #D4AF37;
+}
+.table-admin .table tbody td:last-child {
+  border-right: 1px solid #D4AF37;
+}
+
+/* Hover efek */
+.table-admin .table tbody tr:hover {
+  background-color: #131a33;
+}
+
+/* Select */
+.table-admin .form-select {
+  background-color: #0A0F2C;
+  color: #fff;
+  border: 1px solid #D4AF37;
+}
+
+.table-admin .form-select:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
 }

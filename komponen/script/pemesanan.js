@@ -35,9 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 waktu
             });
 
-            alert(`Terima kasih, ${nama}! Permintaan servis Anda telah kami terima. Teknisi kami akan segera menghubungi Anda untuk konfirmasi jadwal.`);
-            
-          
+            alert(`Terima kasih, ${nama}! Permintaan servis Anda telah kami terima. Teknisi kami akan segera menghubungi Anda untuk konfirmasi jadwal.`)
         });
     }
 });

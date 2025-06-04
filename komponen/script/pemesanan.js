@@ -43,23 +43,21 @@ document.addEventListener('DOMContentLoaded', function() {
 import { ref, push, set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pemesananForm = document.getElementById('formPemesanan'); // Menggunakan ID form yang sudah ada
+    const pemesananForm = document.getElementById('formPemesanan');
 
     if (pemesananForm) {
         pemesananForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Mengambil nilai dari input form berdasarkan ID yang sudah ada di pemesanan.html
             const namaPelanggan = document.getElementById('namaPelanggan').value;
             const nomorTelepon = document.getElementById('nomorTelepon').value;
             const alamatPelanggan = document.getElementById('alamatPelanggan').value;
             const jenisKendaraan = document.getElementById('jenisKendaraan').value;
             const keluhan = document.getElementById('keluhan').value;
             const hasilDiagnosis = document.getElementById('hasilDiagnosis').value;
-            const tanggalKunjungan = document.getElementById('tanggalKunjungan').value; // Tetap ada di form
-            const waktuKunjungan = document.getElementById('waktuKunjungan').value; // Tetap ada di form
+            const tanggalKunjungan = document.getElementById('tanggalKunjungan').value;
+            const waktuKunjungan = document.getElementById('waktuKunjungan').value;
 
-            // Mengakses instance database Firebase dari objek window
             const database = window.firebaseDatabase;
 
             if (!database) {
@@ -69,24 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // Membuat referensi baru dengan kunci unik di node 'Pelanggan'
-                const newPemesananRef = push(ref(database, 'Pelanggan')); // UBAH ke 'Pelanggan'
+                const newPemesananRef = push(ref(database, 'Pelanggan'));
                 await set(newPemesananRef, {
-                    nama: namaPelanggan, // UBAH ke 'nama'
-                    telepon: nomorTelepon, // UBAH ke 'telepon'
-                    alamat: alamatPelanggan, // UBAH ke 'alamat'
-                    mobil: jenisKendaraan, // UBAH ke 'mobil'
-                    deskripsi: keluhan, // UBAH ke 'deskripsi'
-                    kerusakan: hasilDiagnosis || '-', // UBAH ke 'kerusakan', berikan '-' jika kosong
-                    status: 'menunggu', // UBAH status awal menjadi 'menunggu'
-                    // Tanggal dan waktu kunjungan tetap disimpan jika perlu, meskipun tidak diminta di struktur baru
+                    nama: namaPelanggan,
+                    telepon: nomorTelepon,
+                    alamat: alamatPelanggan,
+                    mobil: jenisKendaraan,
+                    deskripsi: keluhan,
+                    kerusakan: hasilDiagnosis || '-',
+                    status: 'menunggu',
                     tanggalKunjungan: tanggalKunjungan,
                     waktuKunjungan: waktuKunjungan,
-                    createdAt: new Date().toISOString() // Timestamp saat pemesanan dibuat (tetap ada)
+                    createdAt: new Date().toISOString()
                 });
 
-                alert('Pemesanan berhasil dikirim!');
-                pemesananForm.reset(); // Mengosongkan form setelah submit
+                pemesananForm.reset(); // Mengosongkan form
+
+                // Tambahkan kode ini untuk redirect ke success.html setelah 2 detik
+                setTimeout(() => {
+                    window.location.href = 'success.html'; // Sesuaikan path jika success.html berada di folder yang berbeda
+                }, 500); // 2000 milidetik = 2 detik
+
             } catch (error) {
                 console.error("Error menambahkan dokumen: ", error);
                 alert('Terjadi kesalahan saat mengirim pemesanan. Mohon coba lagi.');

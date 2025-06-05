@@ -4,15 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
     const database = window.firebaseDatabase;
 
+    // Elemen Toast
     const liveToastElement = document.getElementById('liveToast');
     const toastMessageElement = document.getElementById('toastMessage');
     let liveToast;
 
+    // Elemen Modal Konfirmasi Hapus
     const deleteConfirmationModalElement = document.getElementById('deleteConfirmationModal');
     const confirmDeleteButton = document.getElementById('confirmDeleteButton');
     let deleteModal;
     let orderIdToDelete = null;
 
+    // Inisialisasi Toast dan Modal setelah DOMContentLoaded
     if (liveToastElement) {
         liveToast = new bootstrap.Toast(liveToastElement, {
             autohide: true,
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteModal = new bootstrap.Modal(deleteConfirmationModalElement);
     }
 
+    // Fungsi untuk menampilkan Toast
     function showToast(message, type = 'success') {
         if (liveToastElement && toastMessageElement) {
             toastMessageElement.textContent = message;
@@ -54,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(orders).forEach(orderId => {
                 const order = orders[orderId];
 
-                if (order.status === 'Disetujui') { 
+                if (order.status === 'Disetujui') { // Hanya tampilkan pesanan dengan status 'Disetujui'
                     hasApprovedOrders = true;
                     const newRow = orderTableBody.insertRow();
                     newRow.setAttribute('data-id', orderId);
@@ -65,17 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     newRow.insertCell().textContent = order.mobil || '-';
                     newRow.insertCell().textContent = order.deskripsi;
 
+                    // === KOLOM KOMPONEN RUSAK (EDITABLE) ===
                     const kerusakanCell = newRow.insertCell();
                     const kerusakanInput = document.createElement('input');
                     kerusakanInput.type = 'text';
                     kerusakanInput.classList.add('form-control', 'form-control-sm');
-                    kerusakanInput.value = order.kerusakan || ''; 
+                    kerusakanInput.value = order.kerusakan || ''; // Ambil nilai yang ada atau kosong
                     kerusakanInput.setAttribute('data-field', 'kerusakan');
                     kerusakanCell.appendChild(kerusakanInput);
+                    // ======================================
 
                     newRow.insertCell().textContent = order.tanggalKunjungan || '-';
                     newRow.insertCell().textContent = order.waktuKunjungan || '-';
 
+                    // === KOLOM STATUS PERBAIKAN (DROPDOWN) ===
                     const progresCell = newRow.insertCell();
                     const progresSelect = document.createElement('select');
                     progresSelect.classList.add('form-select', 'form-select-sm');
@@ -91,12 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         const optElement = document.createElement('option');
                         optElement.value = option.value;
                         optElement.textContent = option.text;
-                        if (order.progres === option.value) {
+                        if (order.progres === option.value) { // Set yang terpilih berdasarkan data Firebase
                             optElement.selected = true;
                         }
                         progresSelect.appendChild(optElement);
                     });
                     progresCell.appendChild(progresSelect);
+                    // ==========================================
 
                     const actionCell = newRow.insertCell();
 
@@ -113,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     actionCell.appendChild(deleteButton);
 
                     saveButton.addEventListener('click', () => {
-                        const newKerusakan = kerusakanInput.value; 
-                        const newProgres = progresSelect.value; 
-                        updateOrderDetails(orderId, { kerusakan: newKerusakan, progres: newProgres }); 
+                        const newKerusakan = kerusakanInput.value; // Ambil nilai dari input kerusakan
+                        const newProgres = progresSelect.value; // Ambil nilai dari select progres
+                        updateOrderDetails(orderId, { kerusakan: newKerusakan, progres: newProgres }); // Panggil fungsi update baru
                     });
 
                     deleteButton.addEventListener('click', (e) => {
@@ -154,9 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // === FUNGSI BARU UNTUK UPDATE DETAIL PESANAN ===
     function updateOrderDetails(orderId, updates) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
-        update(orderRef, updates) 
+        update(orderRef, updates) // updates adalah objek { kerusakan: ..., progres: ... }
             .then(() => {
                 showToast(`Detail pesanan berhasil diperbarui.`);
             })
@@ -165,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(`Gagal mengubah detail pesanan. Mohon coba lagi.`, 'error');
             });
     }
+    // ==============================================
 
     function deleteOrder(orderId) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);

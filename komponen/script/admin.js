@@ -1,13 +1,15 @@
-import { ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js"; // Import 'remove'
+// admin.js
+import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+// Hapus 'remove' karena tidak akan digunakan lagi di sini
 
 document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
-
     const database = window.firebaseDatabase;
 
     if (!database) {
         console.error("Firebase Realtime Database belum diinisialisasi.");
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>'; // Ubah colspan ke 10
+        // Sesuaikan colspan menjadi 9 (dari 10) karena 1 kolom (Aksi) dihapus
+        orderTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
         return;
     }
 
@@ -15,63 +17,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     onValue(ordersRef, (snapshot) => {
         const orders = snapshot.val();
-        orderTableBody.innerHTML = ''; // Hapus baris sebelumnya sebelum merender ulang
+        orderTableBody.innerHTML = ''; // Hapus baris sebelumnya
 
         if (orders) {
+            let hasPendingOrders = false; // Flag untuk melacak apakah ada pesanan yang menunggu
+
             Object.keys(orders).forEach(orderId => {
                 const order = orders[orderId];
-                const newRow = orderTableBody.insertRow();
 
-                newRow.insertCell().textContent = order.nama;
-                newRow.insertCell().textContent = order.telepon;
-                newRow.insertCell().textContent = order.alamat;
-                newRow.insertCell().textContent = order.mobil || '-';
-                newRow.insertCell().textContent = order.deskripsi;
-                newRow.insertCell().textContent = order.kerusakan || '-';
-                newRow.insertCell().textContent = order.tanggalKunjungan || '-';
-                newRow.insertCell().textContent = order.waktuKunjungan || '-';
+                // Hanya tampilkan pesanan yang statusnya 'menunggu' atau belum diatur.
+                // Jika sudah 'Disetujui' atau 'Tidak Disetujui', jangan tampilkan di admin.html
+                if (order.status !== 'Disetujui' && order.status !== 'Tidak Disetujui') {
+                    hasPendingOrders = true; // Set flag
+                    const newRow = orderTableBody.insertRow();
 
-                const statusCell = newRow.insertCell();
-                const statusSelect = document.createElement('select');
-                statusSelect.classList.add('form-select');
-                statusSelect.setAttribute('data-id', orderId);
-                statusSelect.innerHTML = `
-                    <option value="Disetujui" ${order.status === 'Disetujui' ? 'selected' : ''}>Disetujui</option>
-                    <option value="Tidak Disetujui" ${order.status === 'Tidak Disetujui' ? 'selected' : ''}>Tidak Disetujui</option>
-                    <option value="menunggu" ${order.status === 'menunggu' ? 'selected' : ''}>Menunggu Disetujui</option>
-                `;
-                statusCell.appendChild(statusSelect);
+                    newRow.insertCell().textContent = order.nama;
+                    newRow.insertCell().textContent = order.telepon;
+                    newRow.insertCell().textContent = order.alamat;
+                    newRow.insertCell().textContent = order.mobil || '-';
+                    newRow.insertCell().textContent = order.deskripsi;
+                    newRow.insertCell().textContent = order.kerusakan || '-';
+                    newRow.insertCell().textContent = order.tanggalKunjungan || '-';
+                    newRow.insertCell().textContent = order.waktuKunjungan || '-';
 
-                // Tambahkan event listener untuk perubahan status
-                statusSelect.addEventListener('change', (e) => {
-                    const changedOrderId = e.target.dataset.id;
-                    const newStatus = e.target.value;
-                    updateOrderStatus(changedOrderId, newStatus);
-                });
+                    const statusCell = newRow.insertCell();
+                    statusCell.classList.add('text-center');
 
-                // SEL BARU UNTUK TOMBOL HAPUS
-                const actionCell = newRow.insertCell();
-                const deleteButton = document.createElement('button');
-                deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-                deleteButton.textContent = 'Hapus';
-                deleteButton.setAttribute('data-id', orderId); // Simpan ID pesanan di tombol hapus
-                actionCell.appendChild(deleteButton);
+                    // Tombol 'Setujui' dan 'Tolak' hanya muncul jika statusnya 'menunggu'
+                    const approveButton = document.createElement('button');
+                    approveButton.classList.add('btn', 'btn-success', 'btn-sm', 'me-2');
+                    approveButton.textContent = 'Setujui';
+                    approveButton.setAttribute('data-id', orderId);
+                    approveButton.addEventListener('click', () => updateOrderStatus(orderId, 'Disetujui'));
 
-                // Tambahkan event listener untuk tombol hapus
-                deleteButton.addEventListener('click', (e) => {
-                    const idToDelete = e.target.dataset.id;
-                    if (confirm(`Anda yakin ingin menghapus data ini?`)) { // Konfirmasi penghapusan
-                        deleteOrder(idToDelete);
-                    }
-                });
+                    const rejectButton = document.createElement('button');
+                    rejectButton.classList.add('btn', 'btn-danger', 'btn-sm');
+                    rejectButton.textContent = 'Tolak';
+                    rejectButton.setAttribute('data-id', orderId);
+                    rejectButton.addEventListener('click', () => updateOrderStatus(orderId, 'Tidak Disetujui'));
+
+                    statusCell.appendChild(approveButton);
+                    statusCell.appendChild(rejectButton);
+
+                    // --- HAPUS KODE UNTUK KOLOM AKSI DAN TOMBOL HAPUS DARI SINI ---
+                    // const actionCell = newRow.insertCell();
+                    // const deleteButton = document.createElement('button');
+                    // deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+                    // deleteButton.textContent = 'Hapus';
+                    // deleteButton.setAttribute('data-id', orderId);
+                    // actionCell.appendChild(deleteButton);
+                    // deleteButton.addEventListener('click', (e) => {
+                    //     const idToDelete = e.target.dataset.id;
+                    //     if (confirm(`Anda yakin ingin menghapus data ini?`)) {
+                    //         deleteOrder(idToDelete);
+                    //     }
+                    // });
+                    // --- HINGGA SINI ---
+                }
             });
 
+            // Periksa jika tidak ada pesanan 'menunggu' yang ditampilkan
+            if (!hasPendingOrders) {
+                // Sesuaikan colspan menjadi 9
+                orderTableBody.innerHTML = '<tr><td colspan="9" class="text-center">Tidak ada pemesanan yang menunggu.</td></tr>';
+            }
+
         } else {
-            orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan.</td></tr>'; // Ubah colspan ke 10
+            // Sesuaikan colspan menjadi 9
+            orderTableBody.innerHTML = '<tr><td colspan="9" class="text-center">Belum ada pemesanan.</td></tr>';
         }
     }, (error) => {
         console.error("Error fetching orders: ", error);
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>'; // Ubah colspan ke 10
+        // Sesuaikan colspan menjadi 9
+        orderTableBody.innerHTML = '<tr><td colspan="9" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
     });
 
     function updateOrderStatus(orderId, newStatus) {
@@ -86,17 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // FUNGSI BARU UNTUK MENGHAPUS DATA
-    function deleteOrder(orderId) {
-        const orderRef = ref(database, `Pelanggan/${orderId}`);
-        remove(orderRef)
-            .then(() => {
-                console.log(`Data pesanan ${orderId} berhasil dihapus.`);
-                // UI akan otomatis diperbarui karena onValue listener
-            })
-            .catch((error) => {
-                console.error("Error menghapus data: ", error);
-                alert(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`);
-            });
-    }
+    // --- HAPUS FUNGSI deleteOrder KARENA TIDAK DIGUNAKAN DI SINI LAGI ---
+    // function deleteOrder(orderId) {
+    //     const orderRef = ref(database, `Pelanggan/${orderId}`);
+    //     remove(orderRef)
+    //         .then(() => {
+    //             console.log(`Data pesanan ${orderId} berhasil dihapus.`);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error menghapus data: ", error);
+    //             alert(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`);
+    //         });
+    // }
+    // --- HINGGA SINI ---
 });

@@ -146,3 +146,65 @@ body {
   border-color: #D4AF37;
   box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
 }
+
+/* Latar belakang dan border utama modal */
+.modal-content {
+    background-color: #0A0F2C; /* Background gelap */
+    border: 1px solid #D4AF37; /* Garis emas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Tambah bayangan agar lebih menonjol */
+}
+
+/* Header modal */
+.modal-header {
+    background-color: #0A0F2C; /* Background gelap */
+    border-bottom: 1px solid #D4AF37; /* Garis bawah header emas */
+    color: white; /* Teks judul putih */
+    padding: 1rem; /* Padding standar Bootstrap */
+}
+
+.modal-header .modal-title {
+    color: white; /* Pastikan teks judul putih */
+    font-weight: bold; /* Judul lebih tebal */
+}
+
+/* Tombol close (X) di header modal */
+.modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Membuat ikon X putih */
+    opacity: 1; /* Pastikan terlihat jelas */
+}
+
+/* Body modal */
+.modal-body {
+    background-color: #0A0F2C; /* Background gelap */
+    color: white; /* Teks isi putih */
+    padding: 1rem; /* Padding standar Bootstrap */
+}
+
+/* Footer modal */
+.modal-footer {
+    background-color: #0A0F2C; /* Background gelap */
+    border-top: 1px solid #D4AF37; /* Garis atas footer emas */
+    padding: 1rem; /* Padding standar Bootstrap */
+}
+
+/* Tombol "Batal" di modal footer */
+.modal-footer .btn-secondary {
+    background-color: #343a40; /* Warna abu-abu gelap */
+    border-color: #343a40;
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #495057; /* Sedikit lebih terang saat hover */
+    border-color: #495057;
+}
+
+/* Tombol "Hapus" di modal footer */
+/* .modal-footer .btn-danger { */
+    /* Biarkan warna merah default Bootstrap atau sesuaikan jika perlu */
+    /* Contoh jika ingin kustom: */
+    /* background-color: #dc3545; */
+    /* border-color: #dc3545; */
+    /* color: white; */
+/* } */

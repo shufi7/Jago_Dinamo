@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/komponen/style/main/admin.css">
     <title>Operator Admin</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbdGGAw-MOYt1LuiQ6bGZqmXiBQH6wVk",
+            authDomain: "jagodinamodata.firebaseapp.com",
+            databaseURL: "https://jagodinamodata-default-rtdb.firebaseio.com",
+            projectId: "jagodinamodata",
+            storageBucket: "jagodinamodata.firebasestorage.app",
+            messagingSenderId: "1045178326640",
+            appId: "1:1045178326640:web:e3abf0380697b738481eb5",
+            measurementId: "G-4XBR0MDY7L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        window.firebaseDatabase = database;
+    </script>
 </head>
 
 <body>
@@ -35,6 +57,16 @@
         </div>
     </nav>
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <section class="table-admin text-black py-4">
         <div class="container-fluid">
             <div class="row">
@@ -50,13 +82,8 @@
                                     <th>Deskripsi Keluhan</th>
                                     <th>Komponen Rusak</th> <th>Tanggal Kunjungan</th>
                                     <th>Waktu Kunjungan</th>
-<<<<<<< HEAD
-                                    <th>Status</th>
-                                    <th>Aksi</th> </tr>
-=======
                                     <th>Status Perbaikan</th> <th>Aksi</th>
                                 </tr>
->>>>>>> 85d5a54a8244e8848a34d1367bdfe0e4e81c055e
                             </thead>
                             <tbody id="orderTableBody">
                                 </tbody>
@@ -86,6 +113,7 @@
     </div>
 
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/komponen/script/adminprogres.js" type="module"></script>
     <script>
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");

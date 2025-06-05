@@ -4,6 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
     const database = window.firebaseDatabase;
 
+    const liveToastElement = document.getElementById('liveToast');
+    const toastMessageElement = document.getElementById('toastMessage');
+    let liveToast;
+
+    if (liveToastElement) {
+        liveToast = new bootstrap.Toast(liveToastElement, {
+            autohide: true,
+            delay: 3000 
+        });
+    }
+
+    
+    function showToast(message, type = 'success') {
+        if (liveToastElement && toastMessageElement) {
+            toastMessageElement.textContent = message;
+            liveToastElement.classList.remove('bg-success', 'bg-danger'); 
+            if (type === 'success') {
+                liveToastElement.classList.add('bg-success');
+            } else if (type === 'error') {
+                liveToastElement.classList.add('bg-danger');
+            }
+            liveToast.show();
+        }
+    }
+
+
     if (!database) {
         console.error("Firebase Realtime Database belum diinisialisasi.");
         orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
@@ -22,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (order.status === 'Disetujui') {
                     const newRow = orderTableBody.insertRow();
-                    newRow.setAttribute('data-id', orderId); 
+                    newRow.setAttribute('data-id', orderId);
 
                     newRow.insertCell().textContent = order.nama;
                     newRow.insertCell().textContent = order.telepon;
@@ -37,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const progresInput = document.createElement('input');
                     progresInput.type = 'text';
                     progresInput.classList.add('form-control', 'form-control-sm');
-                    progresInput.value = order.progres || 'Belum ada progres'; 
-                    progresInput.setAttribute('data-field', 'progres'); 
+                    progresInput.value = order.progres || 'Belum ada progres';
+                    progresInput.setAttribute('data-field', 'progres');
                     progresCell.appendChild(progresInput);
 
                     const actionCell = newRow.insertCell();
@@ -79,17 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, (error) => {
         console.error("Error fetching orders: ", error);
         orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
+        showToast('Gagal memuat data pemesanan.','error'); 
     });
 
     function updateOrderProgres(orderId, newProgres) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         update(orderRef, { progres: newProgres })
             .then(() => {
-                alert(`Progres pesanan ${orderId} berhasil diperbarui.`);
+                showToast(`Progres pesanan ${orderId} berhasil diperbarui.`); 
             })
             .catch((error) => {
                 console.error("Error memperbarui progres: ", error);
-                alert(`Gagal mengubah progres pesanan ${orderId}. Mohon coba lagi.`);
+                showToast(`Gagal mengubah progres pesanan ${orderId}. Mohon coba lagi.`, 'error'); 
             });
     }
 
@@ -97,12 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         remove(orderRef)
             .then(() => {
-                alert(`Data pesanan ${orderId} berhasil dihapus.`);
-                
+                showToast(`Data pesanan ${orderId} berhasil dihapus.`); 
             })
             .catch((error) => {
                 console.error("Error menghapus data: ", error);
-                alert(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`);
+                showToast(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`, 'error'); 
             });
     }
 });

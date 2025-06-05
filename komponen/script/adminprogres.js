@@ -4,15 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
     const database = window.firebaseDatabase;
 
+    // Elemen Toast
     const liveToastElement = document.getElementById('liveToast');
     const toastMessageElement = document.getElementById('toastMessage');
     let liveToast;
 
+    // Elemen Modal Konfirmasi Hapus
     const deleteConfirmationModalElement = document.getElementById('deleteConfirmationModal');
     const confirmDeleteButton = document.getElementById('confirmDeleteButton');
     let deleteModal;
     let orderIdToDelete = null;
 
+    // Inisialisasi Toast dan Modal setelah DOMContentLoaded
     if (liveToastElement) {
         liveToast = new bootstrap.Toast(liveToastElement, {
             autohide: true,
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteModal = new bootstrap.Modal(deleteConfirmationModalElement);
     }
 
+    // Fungsi untuk menampilkan Toast
     function showToast(message, type = 'success') {
         if (liveToastElement && toastMessageElement) {
             toastMessageElement.textContent = message;
@@ -38,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!database) {
         console.error("Firebase Realtime Database belum diinisialisasi.");
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
+        // Sesuaikan colspan jadi 11 (sebelumnya 10, tambah 1 untuk harga)
+        orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
         return;
     }
 
@@ -54,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(orders).forEach(orderId => {
                 const order = orders[orderId];
 
-                if (order.status === 'Disetujui') { 
+                if (order.status === 'Disetujui') {
                     hasApprovedOrders = true;
                     const newRow = orderTableBody.insertRow();
                     newRow.setAttribute('data-id', orderId);
@@ -65,17 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     newRow.insertCell().textContent = order.mobil || '-';
                     newRow.insertCell().textContent = order.deskripsi;
 
+                    // KOLOM KOMPONEN RUSAK (EDITABLE)
                     const kerusakanCell = newRow.insertCell();
                     const kerusakanInput = document.createElement('input');
                     kerusakanInput.type = 'text';
                     kerusakanInput.classList.add('form-control', 'form-control-sm');
-                    kerusakanInput.value = order.kerusakan || ''; 
+                    kerusakanInput.value = order.kerusakan || '';
                     kerusakanInput.setAttribute('data-field', 'kerusakan');
                     kerusakanCell.appendChild(kerusakanInput);
 
                     newRow.insertCell().textContent = order.tanggalKunjungan || '-';
                     newRow.insertCell().textContent = order.waktuKunjungan || '-';
 
+                    // KOLOM STATUS PERBAIKAN (DROPDOWN)
                     const progresCell = newRow.insertCell();
                     const progresSelect = document.createElement('select');
                     progresSelect.classList.add('form-select', 'form-select-sm');
@@ -98,6 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     progresCell.appendChild(progresSelect);
 
+                    // === KOLOM HARGA BARU (EDITABLE) ===
+                    const hargaCell = newRow.insertCell();
+                    const hargaInput = document.createElement('input');
+                    hargaInput.type = 'number'; // Tipe number untuk angka
+                    hargaInput.min = '0'; // Harga tidak bisa negatif
+                    hargaInput.classList.add('form-control', 'form-control-sm');
+                    // Pastikan harga diambil dari Firebase atau default 0
+                    hargaInput.value = order.harga !== undefined ? order.harga : 0;
+                    hargaInput.setAttribute('data-field', 'harga');
+                    hargaCell.appendChild(hargaInput);
+                    // ==================================
+
                     const actionCell = newRow.insertCell();
 
                     const saveButton = document.createElement('button');
@@ -113,9 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     actionCell.appendChild(deleteButton);
 
                     saveButton.addEventListener('click', () => {
-                        const newKerusakan = kerusakanInput.value; 
-                        const newProgres = progresSelect.value; 
-                        updateOrderDetails(orderId, { kerusakan: newKerusakan, progres: newProgres }); 
+                        const newKerusakan = kerusakanInput.value;
+                        const newProgres = progresSelect.value;
+                        const newHarga = parseFloat(hargaInput.value); // Ambil nilai harga sebagai float/number
+
+                        updateOrderDetails(orderId, {
+                            kerusakan: newKerusakan,
+                            progres: newProgres,
+                            harga: newHarga // Sertakan harga di sini
+                        });
                     });
 
                     deleteButton.addEventListener('click', (e) => {
@@ -132,15 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!hasApprovedOrders) {
-                orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan yang disetujui.</td></tr>';
+                // Sesuaikan colspan jadi 11
+                orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center">Belum ada pemesanan yang disetujui.</td></tr>';
             }
 
         } else {
-            orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan.</td></tr>';
+            // Sesuaikan colspan jadi 11
+            orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center">Belum ada pemesanan.</td></tr>';
         }
     }, (error) => {
         console.error("Error fetching orders: ", error);
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
+        // Sesuaikan colspan jadi 11
+        orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
         showToast('Gagal memuat data pemesanan.', 'error');
     });
 
@@ -156,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateOrderDetails(orderId, updates) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
-        update(orderRef, updates) 
+        update(orderRef, updates)
             .then(() => {
                 showToast(`Detail pesanan berhasil diperbarui.`);
             })

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/komponen/style/main/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>Admin - JagoDinamoId</title>
 
     <script type="module">
@@ -34,56 +35,77 @@
 <body>
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama">
         <div class="container-fluid d-flex justify-content-between">
-            <a class="navbar-brand d-flex align-items-center text-white" href="#">
+            <a class="navbar-brand d-flex align-items-center text-white" href="login.html">
                 <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
+                <span class="ms-2">Admin Panel</span>
             </a>
             <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#navbarNavAdmin">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAdmin">
                 <ul class="navbar-nav ms-auto text-end">
                     <li class="nav-item">
-                        <a class="nav-link me-lg-4 button-text text-white" href="/diagnosis.html">Diagnosis</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link me-lg-4 button-text text-white" href="#">Periksa Progres Perbaikan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/pemesanan.html" class="btn order-button mt-2 mt-lg-0">Order</a>
+                        <a class="nav-link me-lg-4 button-text text-white" href="pemesanan.html">Log Out</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="table-admin text-black py-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover align-middle">
-                            <thead class="table-dark text-center">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Alamat</th>
-                                    <th>Kendaraan</th>
-                                    <th>Deskripsi Keluhan</th>
-                                    <th>Komponen Rusak</th>
-                                    <th>Tanggal Kunjungan</th>
-                                    <th>Waktu Kunjungan</th>
-                                    <th>Status</th>
-                                    </tr>
-                            </thead>
-                            <tbody id="orderTableBody">
-                                </tbody>
-                        </table>
+    <div class="wrapper-admin">
+        <nav class="sidebar-admin">
+            <div class="d-flex flex-column h-100">
+                <h5 class="mb-4 text-center">Menu Admin</h5>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="homeadmin.html" class="nav-link">
+                            <i class="bi bi-house-door-fill"></i> Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin.html" class="nav-link active"> <i class="bi bi-clipboard-check"></i> Pesanan Baru
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="adminprogres.html" class="nav-link">
+                            <i class="bi bi-hourglass-split"></i> Progres Perbaikan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="content-admin">
+            <section class="table-admin text-black py-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover align-middle">
+                                    <thead class="table-dark text-center">
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Nomor Telepon</th>
+                                            <th>Alamat</th>
+                                            <th>Kendaraan</th>
+                                            <th>Deskripsi Keluhan</th>
+                                            <th>Komponen Rusak</th>
+                                            <th>Tanggal Kunjungan</th>
+                                            <th>Waktu Kunjungan</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orderTableBody">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
+        </main>
+    </div>
 
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
     <script src="/komponen/script/admin.js" type="module"></script>

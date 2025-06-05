@@ -4,25 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
     const database = window.firebaseDatabase;
 
+    // Elemen Toast
     const liveToastElement = document.getElementById('liveToast');
     const toastMessageElement = document.getElementById('toastMessage');
     let liveToast;
 
+    // Inisialisasi Toast setelah DOMContentLoaded
     if (liveToastElement) {
         liveToast = new bootstrap.Toast(liveToastElement, {
             autohide: true,
-            delay: 3000 
+            delay: 3000 // Toast akan hilang setelah 3 detik
         });
     }
 
-    
+    // Fungsi untuk menampilkan Toast
     function showToast(message, type = 'success') {
         if (liveToastElement && toastMessageElement) {
             toastMessageElement.textContent = message;
-            liveToastElement.classList.remove('bg-success', 'bg-danger'); 
+            liveToastElement.classList.remove('bg-success', 'bg-danger'); // Hapus kelas sebelumnya
             if (type === 'success') {
                 liveToastElement.classList.add('bg-success');
-            } else if (type === 'error') {
+            } else if (type === 'error') { // Digunakan juga untuk notifikasi hapus
                 liveToastElement.classList.add('bg-danger');
             }
             liveToast.show();
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     onValue(ordersRef, (snapshot) => {
         const orders = snapshot.val();
-        orderTableBody.innerHTML = ''; 
+        orderTableBody.innerHTML = ''; // Hapus baris sebelumnya
 
         if (orders) {
             Object.keys(orders).forEach(orderId => {
@@ -86,8 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         updateOrderProgres(orderId, newProgres);
                     });
 
+                    // Event listener untuk tombol hapus
                     deleteButton.addEventListener('click', (e) => {
                         const idToDelete = e.target.dataset.id;
+                        // Konfirmasi sebelum menghapus
                         if (confirm(`Anda yakin ingin menghapus data ini?`)) {
                             deleteOrder(idToDelete);
                         }
@@ -105,18 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, (error) => {
         console.error("Error fetching orders: ", error);
         orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
-        showToast('Gagal memuat data pemesanan.','error'); 
+        showToast('Gagal memuat data pemesanan.', 'error');
     });
 
     function updateOrderProgres(orderId, newProgres) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         update(orderRef, { progres: newProgres })
             .then(() => {
-                showToast(`Progres pesanan ${orderId} berhasil diperbarui.`); 
+                showToast(`Progres pesanan ${orderId} berhasil diperbarui.`);
             })
             .catch((error) => {
                 console.error("Error memperbarui progres: ", error);
-                showToast(`Gagal mengubah progres pesanan ${orderId}. Mohon coba lagi.`, 'error'); 
+                showToast(`Gagal mengubah progres pesanan ${orderId}. Mohon coba lagi.`, 'error');
             });
     }
 
@@ -124,11 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         remove(orderRef)
             .then(() => {
-                showToast(`Data pesanan ${orderId} berhasil dihapus.`); 
+                // Notifikasi sukses hapus menggunakan toast merah
+                showToast(`Data pesanan ${orderId} berhasil dihapus.`, 'error');
             })
             .catch((error) => {
                 console.error("Error menghapus data: ", error);
-                showToast(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`, 'error'); 
+                // Notifikasi error hapus menggunakan toast merah
+                showToast(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`, 'error');
             });
     }
 });

@@ -4,33 +4,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderTableBody = document.getElementById('orderTableBody');
     const database = window.firebaseDatabase;
 
-    // Elemen Toast
     const liveToastElement = document.getElementById('liveToast');
     const toastMessageElement = document.getElementById('toastMessage');
     let liveToast;
 
-    // Inisialisasi Toast setelah DOMContentLoaded
+    const deleteConfirmationModalElement = document.getElementById('deleteConfirmationModal');
+    const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+    let deleteModal;
+    let orderIdToDelete = null;
+
     if (liveToastElement) {
         liveToast = new bootstrap.Toast(liveToastElement, {
             autohide: true,
-            delay: 3000 // Toast akan hilang setelah 3 detik
+            delay: 3000
         });
     }
+    if (deleteConfirmationModalElement) {
+        deleteModal = new bootstrap.Modal(deleteConfirmationModalElement);
+    }
 
-    // Fungsi untuk menampilkan Toast
     function showToast(message, type = 'success') {
         if (liveToastElement && toastMessageElement) {
             toastMessageElement.textContent = message;
-            liveToastElement.classList.remove('bg-success', 'bg-danger'); // Hapus kelas sebelumnya
+            liveToastElement.classList.remove('bg-success', 'bg-danger');
             if (type === 'success') {
                 liveToastElement.classList.add('bg-success');
-            } else if (type === 'error') { // Digunakan juga untuk notifikasi hapus
+            } else if (type === 'error') {
                 liveToastElement.classList.add('bg-danger');
             }
             liveToast.show();
         }
     }
-
 
     if (!database) {
         console.error("Firebase Realtime Database belum diinisialisasi.");
@@ -42,13 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     onValue(ordersRef, (snapshot) => {
         const orders = snapshot.val();
-        orderTableBody.innerHTML = ''; // Hapus baris sebelumnya
+        orderTableBody.innerHTML = '';
 
         if (orders) {
+            let hasApprovedOrders = false;
+
             Object.keys(orders).forEach(orderId => {
                 const order = orders[orderId];
 
-                if (order.status === 'Disetujui') {
+                if (order.status === 'Disetujui') { 
+                    hasApprovedOrders = true;
                     const newRow = orderTableBody.insertRow();
                     newRow.setAttribute('data-id', orderId);
 
@@ -57,17 +64,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     newRow.insertCell().textContent = order.alamat;
                     newRow.insertCell().textContent = order.mobil || '-';
                     newRow.insertCell().textContent = order.deskripsi;
-                    newRow.insertCell().textContent = order.kerusakan || '-';
+
+                    const kerusakanCell = newRow.insertCell();
+                    const kerusakanInput = document.createElement('input');
+                    kerusakanInput.type = 'text';
+                    kerusakanInput.classList.add('form-control', 'form-control-sm');
+                    kerusakanInput.value = order.kerusakan || ''; 
+                    kerusakanInput.setAttribute('data-field', 'kerusakan');
+                    kerusakanCell.appendChild(kerusakanInput);
+
                     newRow.insertCell().textContent = order.tanggalKunjungan || '-';
                     newRow.insertCell().textContent = order.waktuKunjungan || '-';
 
                     const progresCell = newRow.insertCell();
-                    const progresInput = document.createElement('input');
-                    progresInput.type = 'text';
-                    progresInput.classList.add('form-control', 'form-control-sm');
-                    progresInput.value = order.progres || 'Belum ada progres';
-                    progresInput.setAttribute('data-field', 'progres');
-                    progresCell.appendChild(progresInput);
+                    const progresSelect = document.createElement('select');
+                    progresSelect.classList.add('form-select', 'form-select-sm');
+                    progresSelect.setAttribute('data-field', 'progres');
+
+                    const statusOptions = [
+                        { value: 'Belum diperbaiki', text: 'Belum diperbaiki' },
+                        { value: 'Sedang diperbaiki', text: 'Sedang diperbaiki' },
+                        { value: 'Selesai diperbaiki', text: 'Selesai diperbaiki' }
+                    ];
+
+                    statusOptions.forEach(option => {
+                        const optElement = document.createElement('option');
+                        optElement.value = option.value;
+                        optElement.textContent = option.text;
+                        if (order.progres === option.value) {
+                            optElement.selected = true;
+                        }
+                        progresSelect.appendChild(optElement);
+                    });
+                    progresCell.appendChild(progresSelect);
 
                     const actionCell = newRow.insertCell();
 
@@ -84,22 +113,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     actionCell.appendChild(deleteButton);
 
                     saveButton.addEventListener('click', () => {
-                        const newProgres = progresInput.value;
-                        updateOrderProgres(orderId, newProgres);
+                        const newKerusakan = kerusakanInput.value; 
+                        const newProgres = progresSelect.value; 
+                        updateOrderDetails(orderId, { kerusakan: newKerusakan, progres: newProgres }); 
                     });
 
-                    // Event listener untuk tombol hapus
                     deleteButton.addEventListener('click', (e) => {
-                        const idToDelete = e.target.dataset.id;
-                        // Konfirmasi sebelum menghapus
-                        if (confirm(`Anda yakin ingin menghapus data ini?`)) {
-                            deleteOrder(idToDelete);
+                        orderIdToDelete = e.target.dataset.id;
+                        if (deleteModal) {
+                            deleteModal.show();
+                        } else {
+                            if (confirm(`Anda yakin ingin menghapus data ini?`)) {
+                                deleteOrder(orderIdToDelete);
+                            }
                         }
                     });
                 }
             });
 
-            if (orderTableBody.children.length === 0) {
+            if (!hasApprovedOrders) {
                 orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan yang disetujui.</td></tr>';
             }
 
@@ -112,15 +144,25 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Gagal memuat data pemesanan.', 'error');
     });
 
-    function updateOrderProgres(orderId, newProgres) {
+    if (confirmDeleteButton) {
+        confirmDeleteButton.addEventListener('click', () => {
+            if (orderIdToDelete) {
+                deleteOrder(orderIdToDelete);
+                deleteModal.hide();
+                orderIdToDelete = null;
+            }
+        });
+    }
+
+    function updateOrderDetails(orderId, updates) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
-        update(orderRef, { progres: newProgres })
+        update(orderRef, updates) 
             .then(() => {
-                showToast(`Progres pesanan ${orderId} berhasil diperbarui.`);
+                showToast(`Detail pesanan berhasil diperbarui.`);
             })
             .catch((error) => {
-                console.error("Error memperbarui progres: ", error);
-                showToast(`Gagal mengubah progres pesanan ${orderId}. Mohon coba lagi.`, 'error');
+                console.error("Error memperbarui detail pesanan: ", error);
+                showToast(`Gagal mengubah detail pesanan. Mohon coba lagi.`, 'error');
             });
     }
 
@@ -128,13 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         remove(orderRef)
             .then(() => {
-                // Notifikasi sukses hapus menggunakan toast merah
-                showToast(`Data pesanan ${orderId} berhasil dihapus.`, 'error');
+                showToast(`Data pesanan berhasil dihapus.`, 'error');
             })
             .catch((error) => {
                 console.error("Error menghapus data: ", error);
-                // Notifikasi error hapus menggunakan toast merah
-                showToast(`Gagal menghapus data pesanan ${orderId}. Mohon coba lagi.`, 'error');
+                showToast(`Gagal menghapus data pesanan. Mohon coba lagi.`, 'error');
             });
     }
 });

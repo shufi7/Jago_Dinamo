@@ -48,11 +48,15 @@
                                     <th>Alamat</th>
                                     <th>Kendaraan</th>
                                     <th>Deskripsi Keluhan</th>
-                                    <th>Komponen Rusak</th>
-                                    <th>Tanggal Kunjungan</th>
+                                    <th>Komponen Rusak</th> <th>Tanggal Kunjungan</th>
                                     <th>Waktu Kunjungan</th>
+<<<<<<< HEAD
                                     <th>Status</th>
                                     <th>Aksi</th> </tr>
+=======
+                                    <th>Status Perbaikan</th> <th>Aksi</th>
+                                </tr>
+>>>>>>> 85d5a54a8244e8848a34d1367bdfe0e4e81c055e
                             </thead>
                             <tbody id="orderTableBody">
                                 </tbody>
@@ -62,6 +66,24 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title text-white" id="deleteConfirmationModalLabel">Konfirmasi Penghapusan Data</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-modal-body">
+                    Anda yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
     <script>

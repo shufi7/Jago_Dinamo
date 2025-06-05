@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultProgres.textContent = 'Tidak disetujui';
                     resultHarga.textContent = 'Tidak berlaku';
                     statusMessage.classList.add('alert-warning'); // Menggunakan alert-warning untuk penolakan
-                    statusMessage.textContent = 'Status: Permintaan Anda Tidak Disetujui. Silakan hubungi kami untuk informasi lebih lanjut.';
+                    statusMessage.textContent = 'Status: Permintaan Anda Tidak Disetujui. Silakan pesan kembali ditanggal yang berbeda.';
                     statusMessage.style.display = 'block';
                     progresResult.style.display = 'block'; // Tetap tampilkan detail pesanan meskipun ditolak
 

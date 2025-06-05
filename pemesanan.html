@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg custom-navbar">
+    <nav class="navbar navbar-expand-lg custom-navbar fixed-top">
         <div class="container-fluid d-flex justify-content-between">
             <a class="navbar-brand d-flex align-items-center text-white" href="home.html">
                 <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
@@ -49,85 +49,87 @@
                         <a class="nav-link me-lg-4 button-text text-white" href="diagnosis.html">Diagnosis</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link me-lg-4 button-text text-white" href="#">Periksa Progres Perbaikan</a>
+                        <a class="nav-link me-lg-4 button-text text-white" href="progres.html">Periksa Progres Perbaikan</a>
                     </li>
                     <li class="nav-item">
-                        <a href="pesan.html" class="btn order-button mt-2 mt-lg-0 active">Order</a>
+                        <a href="pemesanan.html" class="btn order-button mt-2 mt-lg-0 active">Order</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="wrapper">
-        <div class="page-title-container">
-            <div class="container">
-                <div class="text-center">
-                    <h1>Formulir Pemesanan Layanan</h1>
+    <div style="padding-top: 70px;">
+        <div class="wrapper">
+            <div class="page-title-container">
+                <div class="container">
+                    <div class="text-center">
+                        <h1>Formulir Pemesanan Layanan</h1>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                    <div class="card">
-                        <div class="card-header">
-                            Detail Pemesanan
-                        </div>
-                        <div class="card-body p-4">
-                            <form id="formPemesanan">
-                                <h5 class="card-title mb-3">Data Diri Pelanggan</h5>
-                                <div class="mb-3">
-                                    <label for="namaPelanggan" class="form-label">Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="namaPelanggan" placeholder="Masukkan nama lengkap Anda" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nomorTelepon" class="form-label">Nomor Telepon/WA</label>
-                                    <input type="tel" class="form-control" id="nomorTelepon" placeholder="Contoh: 081234567890" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="alamatPelanggan" class="form-label">Alamat Lengkap</label>
-                                    <textarea class="form-control" id="alamatPelanggan" rows="3" placeholder="Masukkan alamat lengkap untuk kunjungan teknisi" required></textarea>
-                                </div>
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <div class="card">
+                            <div class="card-header">
+                                Detail Pemesanan
+                            </div>
+                            <div class="card-body p-4">
+                                <form id="formPemesanan">
+                                    <h5 class="card-title mb-3">Data Diri Pelanggan</h5>
+                                    <div class="mb-3">
+                                        <label for="namaPelanggan" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="namaPelanggan" placeholder="Masukkan nama lengkap Anda" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nomorTelepon" class="form-label">Nomor Telepon/WA</label>
+                                        <input type="tel" class="form-control" id="nomorTelepon" placeholder="Contoh: 081234567890" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="alamatPelanggan" class="form-label">Alamat Lengkap</label>
+                                        <textarea class="form-control" id="alamatPelanggan" rows="3" placeholder="Masukkan alamat lengkap untuk kunjungan teknisi" required></textarea>
+                                    </div>
 
-                                <h5 class="card-title mt-4 mb-3">Detail Kendaraan & Keluhan</h5>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="jenisKendaraan" class="form-label">Jenis Kendaraan</label>
-                                        <input type="text" class="form-control" id="jenisKendaraan" placeholder="Contoh: Mobil Toyota Avanza 2018">
+                                    <h5 class="card-title mt-4 mb-3">Detail Kendaraan & Keluhan</h5>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="jenisKendaraan" class="form-label">Jenis Kendaraan</label>
+                                            <input type="text" class="form-control" id="jenisKendaraan" placeholder="Contoh: Mobil Toyota Avanza 2018">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="keluhan" class="form-label">Deskripsi Keluhan</label>
-                                    <textarea class="form-control" id="keluhan" rows="4" placeholder="Jelaskan keluhan atau masalah pada dinamo Anda..." required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="hasilDiagnosis" class="form-label">Komponen Rusak (Berdasarkan Diagnosis Awal)</label>
-                                    <input type="text" class="form-control" id="hasilDiagnosis" placeholder="Contoh: Aki, Dinamo Starter (Opsional)">
-                                    <div class="form-text text-light">Jika Anda telah melakukan diagnosis awal, masukkan komponen yang terindikasi rusak.</div>
-                                </div>
+                                    <div class="mb-3">
+                                        <label for="keluhan" class="form-label">Deskripsi Keluhan</label>
+                                        <textarea class="form-control" id="keluhan" rows="4" placeholder="Jelaskan keluhan atau masalah pada dinamo Anda..." required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="hasilDiagnosis" class="form-label">Komponen Rusak (Berdasarkan Diagnosis Awal)</label>
+                                        <input type="text" class="form-control" id="hasilDiagnosis" placeholder="Contoh: Aki, Dinamo Starter (Opsional)">
+                                        <div class="form-text text-light">Jika Anda telah melakukan diagnosis awal, masukkan komponen yang terindikasi rusak.</div>
+                                    </div>
 
-                                <h5 class="card-title mt-4 mb-3">Jadwal Kunjungan Teknisi</h5>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan</label>
-                                        <input type="date" class="form-control" id="tanggalKunjungan" required>
+                                    <h5 class="card-title mt-4 mb-3">Jadwal Kunjungan Teknisi</h5>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan</label>
+                                            <input type="date" class="form-control" id="tanggalKunjungan" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="waktuKunjungan" class="form-label">Preferensi Waktu</label>
+                                            <select class="form-select" id="waktuKunjungan" required>
+                                                <option selected disabled value="">Pilih waktu...</option>
+                                                <option value="pagi">Pagi (08:00 - 11:00)</option>
+                                                <option value="siang">Siang (13:00 - 16:00)</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="waktuKunjungan" class="form-label">Preferensi Waktu</label>
-                                        <select class="form-select" id="waktuKunjungan" required>
-                                            <option selected disabled value="">Pilih waktu...</option>
-                                            <option value="pagi">Pagi (08:00 - 11:00)</option>
-                                            <option value="siang">Siang (13:00 - 16:00)</option>
-                                        </select>
+                                    
+                                    <div class="d-grid gap-2 mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Kirim Permintaan Servis</button>
                                     </div>
-                                </div>
-                                
-                                <div class="d-grid gap-2 mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">Kirim Permintaan Servis</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,5 +143,35 @@
 
     <script src="komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="komponen/script/pemesanan.js" type="module" defer></script>
+    <script>
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("shadow");
+                navbar.style.backgroundColor = '#0A0F2C';
+            } else {
+                navbar.classList.remove("shadow");
+                navbar.style.backgroundColor = 'transparent';
+            }
+        });
+    </script>
+
+    <!-- MODAL KUSTOM UNTUK NOTIFIKASI (SLOT PENUH, FIELD WAJIB, ERROR) -->
+    <div class="modal fade" id="pemesananAlertModal" tabindex="-1" aria-labelledby="pemesananAlertModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title text-white" id="pemesananAlertModalLabel">Pemberitahuan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-modal-body" id="pemesananAlertModalBody">
+                    <!-- Pesan akan dimuat di sini -->
+                </div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oke</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

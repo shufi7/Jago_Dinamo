@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultTelepon = document.getElementById('resultTelepon');
     const resultKerusakan = document.getElementById('resultKerusakan');
     const resultProgres = document.getElementById('resultProgres');
-    const resultHarga = document.getElementById('resultHarga'); // Elemen baru untuk harga
+    const resultHarga = document.getElementById('resultHarga');
     const statusMessage = document.getElementById('statusMessage');
 
     if (!database) {
@@ -28,14 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         progresResult.style.display = 'none';
         noDataFound.style.display = 'none';
-        statusMessage.style.display = 'none';
+        statusMessage.style.display = 'none'; // Sembunyikan pesan status saat pencarian baru
 
         const nama = inputNama.value.trim();
         const telepon = inputTelepon.value.trim();
 
         if (nama === '' || telepon === '') {
-            // Bisa diganti dengan toast jika ingin tampilan lebih cantik
-            alert('Nama dan Nomor Telepon harus diisi.');
+            console.warn('Nama dan Nomor Telepon harus diisi.'); // Notifikasi di konsol
+            // Anda bisa menambahkan indikator visual di UI tanpa alert() di sini
+            noDataFound.textContent = 'Nama dan Nomor Telepon harus diisi.';
+            noDataFound.style.display = 'block';
             return;
         }
 
@@ -58,36 +60,69 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            if (foundOrder && foundOrder.status === 'Disetujui') {
-                // Tampilkan hasil
+            if (foundOrder) {
+                // Bersihkan kelas alert sebelumnya
+                statusMessage.classList.remove('alert-success', 'alert-warning', 'alert-info', 'alert-danger');
+
+                // Tampilkan detail pesanan
                 resultNama.textContent = foundOrder.nama;
                 resultTelepon.textContent = foundOrder.telepon;
                 resultKerusakan.textContent = foundOrder.kerusakan || 'Belum ada data kerusakan';
-                resultProgres.textContent = foundOrder.progres || 'Belum diperbarui';
-                // Tampilkan harga. Format sebagai mata uang jika perlu (misal: "Rp 150.000")
-                resultHarga.textContent = foundOrder.harga !== undefined ? `Rp ${foundOrder.harga.toLocaleString('id-ID')}` : 'Belum ada biaya';
 
+                // Logika untuk menampilkan progres dan harga berdasarkan status
+                if (foundOrder.status === 'Disetujui') {
+                    resultHarga.textContent = foundOrder.harga !== undefined ? `Rp ${foundOrder.harga.toLocaleString('id-ID')}` : 'Belum ada biaya';
+                    
+                    // Logika spesifik untuk progres ketika status 'Disetujui'
+                    if (foundOrder.progres === 'Selesai diperbaiki') {
+                        resultProgres.textContent = foundOrder.progres;
+                        statusMessage.classList.add('alert-success');
+                        statusMessage.textContent = 'Perbaikan Anda telah selesai! Silakan hubungi kami untuk pengambilan dan pembayaran.';
+                    } else if (foundOrder.progres === 'Sedang diperbaiki') {
+                        resultProgres.textContent = foundOrder.progres;
+                        statusMessage.classList.add('alert-info');
+                        statusMessage.textContent = 'Perbaikan Anda sedang dalam proses. Teknisi kami sedang mengerjakannya.';
+                    } else if (foundOrder.progres === 'Belum diperbaiki') {
+                        resultProgres.textContent = foundOrder.progres;
+                        statusMessage.classList.add('alert-warning');
+                        statusMessage.textContent = 'Perbaikan Anda belum dimulai. Tim kami akan segera menanganinya.';
+                    } else {
+                        // Jika progres kosong atau nilai lain yang tidak terdefinisi
+                        resultProgres.textContent = 'Menunggu pembaruan progres';
+                        statusMessage.classList.add('alert-info');
+                        statusMessage.textContent = 'Status progres Anda akan segera diperbarui.';
+                    }
+                    statusMessage.style.display = 'block'; // Pastikan pesan status terlihat
+                    progresResult.style.display = 'block'; // Pastikan hasil terlihat
 
-                // Tampilan pesan status berdasarkan progres
-                statusMessage.classList.remove('alert-success', 'alert-warning', 'alert-info');
-                statusMessage.style.display = 'block';
+                } else if (foundOrder.status === 'Tidak Disetujui') {
+                    resultProgres.textContent = 'Tidak disetujui';
+                    resultHarga.textContent = 'Tidak berlaku';
+                    statusMessage.classList.add('alert-warning'); // Menggunakan alert-warning untuk penolakan
+                    statusMessage.textContent = 'Status: Permintaan Anda Tidak Disetujui. Silakan hubungi kami untuk informasi lebih lanjut.';
+                    statusMessage.style.display = 'block';
+                    progresResult.style.display = 'block'; // Tetap tampilkan detail pesanan meskipun ditolak
 
-                if (foundOrder.progres === 'Selesai diperbaiki') {
-                    statusMessage.classList.add('alert-success');
-                    statusMessage.textContent = 'Perbaikan Anda telah selesai! Silakan hubungi kami untuk pengambilan dan pembayaran.';
-                } else if (foundOrder.progres === 'Sedang diperbaiki') {
+                } else if (foundOrder.status === 'menunggu') {
+                    resultProgres.textContent = 'Menunggu pembaruan';
+                    resultHarga.textContent = 'Akan dikonfirmasi';
                     statusMessage.classList.add('alert-info');
-                    statusMessage.textContent = 'Perbaikan Anda sedang dalam proses. Teknisi kami sedang mengerjakannya.';
-                } else if (foundOrder.progres === 'Belum diperbaiki') {
-                    statusMessage.classList.add('alert-warning');
-                    statusMessage.textContent = 'Perbaikan Anda belum dimulai. Tim kami akan segera menanganinya.';
+                    statusMessage.textContent = 'Status: Permintaan Anda Sedang Menunggu Disetujui. Kami akan segera menghubungi Anda.';
+                    statusMessage.style.display = 'block';
+                    progresResult.style.display = 'block'; // Tetap tampilkan detail pesanan
+
                 } else {
-                    statusMessage.classList.add('alert-info');
-                    statusMessage.textContent = 'Status progres Anda akan segera diperbarui.';
+                    // Untuk status yang tidak dikenali
+                    resultProgres.textContent = 'Status tidak dikenal';
+                    resultHarga.textContent = 'Akan dikonfirmasi';
+                    statusMessage.classList.add('alert'); // Kelas alert default
+                    statusMessage.textContent = `Status: ${foundOrder.status}. (Status tidak dikenal)`;
+                    statusMessage.style.display = 'block';
+                    progresResult.style.display = 'block';
                 }
-
-                progresResult.style.display = 'block';
+                
             } else {
+                // Jika pesanan tidak ditemukan
                 noDataFound.style.display = 'block';
             }
 

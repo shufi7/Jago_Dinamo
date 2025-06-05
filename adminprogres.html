@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/komponen/style/main/admin.css">
     <title>Operator Admin</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js"; 
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbdGGAw-MOYt1LuiQ6bGZqmXiBQH6wVk",
+            authDomain: "jagodinamodata.firebaseapp.com",
+            databaseURL: "https://jagodinamodata-default-rtdb.firebaseio.com",
+            projectId: "jagodinamodata",
+            storageBucket: "jagodinamodata.firebasestorage.app",
+            messagingSenderId: "1045178326640",
+            appId: "1:1045178326640:web:e3abf0380697b738481eb5",
+            measurementId: "G-4XBR0MDY7L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app); 
+        window.firebaseDatabase = database; 
+    </script>
 </head>
 
 <body>
@@ -51,8 +73,8 @@
                                     <th>Komponen Rusak</th>
                                     <th>Tanggal Kunjungan</th>
                                     <th>Waktu Kunjungan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th> </tr>
+                                    <th>Status Progres</th> <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody id="orderTableBody">
                                 </tbody>
@@ -64,7 +86,7 @@
     </section>
 
     <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
-    <script>
+    <script src="/komponen/script/adminprogres.js" type="module"></script> <script>
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
             if (window.scrollY > 50) {

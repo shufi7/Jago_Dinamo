@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!database) {
         console.error("Firebase Realtime Database belum diinisialisasi.");
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
+        // Sesuaikan colspan jadi 11 (sebelumnya 10, tambah 1 untuk harga)
+        orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center text-danger">Terjadi kesalahan saat menghubungkan ke database. Mohon coba lagi.</td></tr>';
         return;
     }
 
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(orders).forEach(orderId => {
                 const order = orders[orderId];
 
-                if (order.status === 'Disetujui') { // Hanya tampilkan pesanan dengan status 'Disetujui'
+                if (order.status === 'Disetujui') {
                     hasApprovedOrders = true;
                     const newRow = orderTableBody.insertRow();
                     newRow.setAttribute('data-id', orderId);
@@ -69,20 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     newRow.insertCell().textContent = order.mobil || '-';
                     newRow.insertCell().textContent = order.deskripsi;
 
-                    // === KOLOM KOMPONEN RUSAK (EDITABLE) ===
+                    // KOLOM KOMPONEN RUSAK (EDITABLE)
                     const kerusakanCell = newRow.insertCell();
                     const kerusakanInput = document.createElement('input');
                     kerusakanInput.type = 'text';
                     kerusakanInput.classList.add('form-control', 'form-control-sm');
-                    kerusakanInput.value = order.kerusakan || ''; // Ambil nilai yang ada atau kosong
+                    kerusakanInput.value = order.kerusakan || '';
                     kerusakanInput.setAttribute('data-field', 'kerusakan');
                     kerusakanCell.appendChild(kerusakanInput);
-                    // ======================================
 
                     newRow.insertCell().textContent = order.tanggalKunjungan || '-';
                     newRow.insertCell().textContent = order.waktuKunjungan || '-';
 
-                    // === KOLOM STATUS PERBAIKAN (DROPDOWN) ===
+                    // KOLOM STATUS PERBAIKAN (DROPDOWN)
                     const progresCell = newRow.insertCell();
                     const progresSelect = document.createElement('select');
                     progresSelect.classList.add('form-select', 'form-select-sm');
@@ -98,13 +98,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         const optElement = document.createElement('option');
                         optElement.value = option.value;
                         optElement.textContent = option.text;
-                        if (order.progres === option.value) { // Set yang terpilih berdasarkan data Firebase
+                        if (order.progres === option.value) {
                             optElement.selected = true;
                         }
                         progresSelect.appendChild(optElement);
                     });
                     progresCell.appendChild(progresSelect);
-                    // ==========================================
+
+                    // === KOLOM HARGA BARU (EDITABLE) ===
+                    const hargaCell = newRow.insertCell();
+                    const hargaInput = document.createElement('input');
+                    hargaInput.type = 'number'; // Tipe number untuk angka
+                    hargaInput.min = '0'; // Harga tidak bisa negatif
+                    hargaInput.classList.add('form-control', 'form-control-sm');
+                    // Pastikan harga diambil dari Firebase atau default 0
+                    hargaInput.value = order.harga !== undefined ? order.harga : 0;
+                    hargaInput.setAttribute('data-field', 'harga');
+                    hargaCell.appendChild(hargaInput);
+                    // ==================================
 
                     const actionCell = newRow.insertCell();
 
@@ -121,9 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     actionCell.appendChild(deleteButton);
 
                     saveButton.addEventListener('click', () => {
-                        const newKerusakan = kerusakanInput.value; // Ambil nilai dari input kerusakan
-                        const newProgres = progresSelect.value; // Ambil nilai dari select progres
-                        updateOrderDetails(orderId, { kerusakan: newKerusakan, progres: newProgres }); // Panggil fungsi update baru
+                        const newKerusakan = kerusakanInput.value;
+                        const newProgres = progresSelect.value;
+                        const newHarga = parseFloat(hargaInput.value); // Ambil nilai harga sebagai float/number
+
+                        updateOrderDetails(orderId, {
+                            kerusakan: newKerusakan,
+                            progres: newProgres,
+                            harga: newHarga // Sertakan harga di sini
+                        });
                     });
 
                     deleteButton.addEventListener('click', (e) => {
@@ -140,15 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!hasApprovedOrders) {
-                orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan yang disetujui.</td></tr>';
+                // Sesuaikan colspan jadi 11
+                orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center">Belum ada pemesanan yang disetujui.</td></tr>';
             }
 
         } else {
-            orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center">Belum ada pemesanan.</td></tr>';
+            // Sesuaikan colspan jadi 11
+            orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center">Belum ada pemesanan.</td></tr>';
         }
     }, (error) => {
         console.error("Error fetching orders: ", error);
-        orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
+        // Sesuaikan colspan jadi 11
+        orderTableBody.innerHTML = '<tr><td colspan="11" class="text-center text-danger">Gagal memuat data pemesanan. Mohon periksa koneksi internet Anda.</td></tr>';
         showToast('Gagal memuat data pemesanan.', 'error');
     });
 
@@ -162,10 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === FUNGSI BARU UNTUK UPDATE DETAIL PESANAN ===
     function updateOrderDetails(orderId, updates) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
-        update(orderRef, updates) // updates adalah objek { kerusakan: ..., progres: ... }
+        update(orderRef, updates)
             .then(() => {
                 showToast(`Detail pesanan berhasil diperbarui.`);
             })
@@ -174,7 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(`Gagal mengubah detail pesanan. Mohon coba lagi.`, 'error');
             });
     }
-    // ==============================================
 
     function deleteOrder(orderId) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);

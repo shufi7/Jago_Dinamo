@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Cek jumlah pesanan yang aktif/menunggu untuk slot ini
                 // Jika sudah ada 2 pesanan yang menunggu, maka slot dianggap penuh (activeOrdersForSlot.length >= 2)
-                if (activeOrdersForSlot.length >= 2) { // Batas 2 orang
+                if (activeOrdersForSlot.length >= 3) { // Batas 2 orang
                     console.warn('Slot jadwal ini sudah penuh. Mohon pilih tanggal atau waktu lain.');
                     showPemesananAlert('Mohon maaf, slot jadwal untuk tanggal ' + tanggalKunjungan + ' pada jam ' + waktuKunjungan + ' sudah penuh. Silakan pilih tanggal atau waktu lain.');
                     return;

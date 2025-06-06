@@ -1,27 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Reset dan Normalisasi Dasar */
 * {
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    /* Mencegah scrollbar horizontal di seluruh halaman */
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    padding-top: 0; /* Hapus padding-top dari body */
-    background-color: #0A0F2C; /* Background gelap sebagai fallback jika hero tidak mengisi penuh */
+    padding-top: 0;
+    background-color: #0A0F2C;
 }
 
-/* --- Navbar (Gaya Umum) --- */
-.shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
+/* --- Umum Navbar --- */
 .navbar-utama {
     margin: 0;
     transition: background-color 0.3s ease;
+    z-index: 1030;
+    background-color: transparent;
+    /* Default transparan */
+    padding: 10px 70px;
 }
 
-.custom-navbar {
-    background-color: transparent; /* Ini membuatnya transparan di awal */
-    padding: 10px 70px;
+.shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .logo-navbar {
@@ -53,26 +63,84 @@ body {
     color: white;
 }
 
+/* --- Perbaikan Tombol Burger Navbar --- */
 .navbar-toggler {
-    border: none;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0.25rem;
+    transition: box-shadow .15s ease-in-out;
+    cursor: pointer;
 }
 
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+.navbar-toggler:hover {
+    border-color: rgba(255, 255, 255, 0.75);
 }
 
-/* --- Hero Section Baru --- */
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem;
+}
+
+/* --- Navbar Collapse Mobile (Default/Mobile First) --- */
+.navbar-collapse {
+    z-index: 1020;
+    transition: height 0.35s ease;
+}
+
+.navbar-collapse.show {
+    background-color: #0d0f2b;
+    padding: 1rem;
+    text-align: end;
+    /* Rata kanan item menu */
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: calc(100vh - 56px);
+    /* Tinggi menu disesuaikan */
+}
+
+.navbar-nav {
+    flex-direction: column !important;
+    width: 100%;
+    align-items: flex-end !important;
+    /* Rata kanan item menu */
+}
+
+.navbar-nav .nav-item {
+    width: auto;
+    text-align: end;
+    /* Rata kanan teks di item menu */
+    margin-bottom: 0.5rem;
+}
+
+
+/* --- Hero Section --- */
 .hero-new {
-    min-height: 100vh; /* Set tinggi minimal ke 100% tinggi viewport */
-    background-color: #0A0F2C; /* Background gelap sebagai fallback */
+    min-height: auto;
+    /* Default mobile-first */
+    background-color: #0A0F2C;
     position: relative;
     overflow: hidden;
-    padding-top: 100px; /* Padding atas untuk memberi ruang navbar */
-    padding-bottom: 50px;
-    background-image: url('/komponen/image/mesin1.jpg'); /* Pastikan gambar ini ada di folder Anda! */
+    padding-top: 80px;
+    /* Default mobile-first */
+    padding-bottom: 40px;
+    /* Default mobile-first */
+    background-image: url('/komponen/image/mesin1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-overlay {
@@ -90,21 +158,36 @@ body {
     z-index: 2;
 }
 
+/* MOBILE-FIRST: GAMBAR DI ATAS, TEKS DI BAWAH */
+.hero-new .container .row {
+    flex-direction: column;
+    /* Menggunakan column secara default */
+    text-align: center;
+    /* Pusatkan teks */
+    align-items: center;
+    /* Pusatkan item secara horizontal */
+}
+
 .hero-image {
-    max-width: 80%;
+    max-width: 250px;
+    /* Disesuaikan di media query */
     height: auto;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    margin: 0 auto 20px auto;
+    /* Pusatkan gambar dan beri margin bawah */
 }
 
 .hero-title {
     font-weight: 700;
-    margin-top: 0;
-    font-size: 3.5rem;
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    /* Disesuaikan di media query */
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
+    /* Disesuaikan di media query */
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -112,10 +195,12 @@ body {
     background-color: #D4AF37;
     border-color: #D4AF37;
     font-weight: bold;
-    font-size: 1.25rem;
-    padding: 15px 30px;
+    font-size: 0.9rem;
+    /* Disesuaikan di media query */
+    padding: 10px 20px;
     border-radius: 10px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px !important;
 }
 
 .hero-button:hover {
@@ -128,64 +213,28 @@ body {
 .section-title {
     font-weight: 700;
     color: #D4AF37;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 1.8rem;
+    /* Disesuaikan di media query */
+    margin-bottom: 2rem;
 }
 
-/* --- Section "Mengapa Memilih Kami?" --- */
-.why-choose-us-section {
+/* --- Kartu Layanan & Fitur (Service & Feature Cards) --- */
+.why-choose-us-section,
+.main-features-section {
     background-color: #0A0F2C;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 40px;
+    /* Disesuaikan di media query */
+    padding-bottom: 40px;
+    /* Disesuaikan di media query */
+}
+
+/* Pemisah antara section */
+.why-choose-us-section {
     border-top: 1px solid rgba(212, 175, 55, 0.2);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.service-card {
-    background-color: #1A1F3C;
-    border: 1px solid #D4AF37;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-}
-
-.service-icon {
-    font-size: 3.5rem;
-    color: #D4AF37;
-    margin-bottom: 1rem;
-}
-
-.service-card .card-title {
-    font-weight: 600;
-    color: white;
-    margin-bottom: 0.75rem;
-    font-size: 1.5rem;
-}
-
-.service-card .card-text {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-
-/* --- Section Fitur Utama (Diagnosis, Order, Progres) --- */
-.main-features-section {
-    background-color: #0A0F2C;
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
+.service-card,
 .feature-card {
     background-color: #1A1F3C;
     border: 1px solid #D4AF37;
@@ -195,31 +244,41 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    /* Center for service-card, flex-start for feature-card (mobile first) */
     align-items: center;
-    padding: 25px;
+    padding: 15px;
+    /* Disesuaikan di media query */
+    margin-bottom: 20px;
 }
 
+.service-card:hover,
 .feature-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
-.feature-icon {
-    font-size: 3.5rem;
+.service-icon {
+    font-size: 2.5rem;
+    /* Disesuaikan di media query */
     color: #D4AF37;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    /* Disesuaikan di media query */
 }
 
+.service-card .card-title,
 .feature-card .card-title {
     font-weight: 600;
     color: white;
     margin-bottom: 0.75rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    /* Disesuaikan di media query */
 }
 
+.service-card .card-text,
 .feature-card .card-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    /* Disesuaikan di media query */
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
     flex-grow: 1;
@@ -230,7 +289,8 @@ body {
     border-color: #D4AF37;
     color: white;
     font-weight: bold;
-    padding: 10px 25px;
+    padding: 8px 18px;
+    /* Disesuaikan di media query */
     border-radius: 8px;
     transition: background-color 0.3s ease;
     text-decoration: none;
@@ -246,7 +306,7 @@ body {
 /* --- Bagian Saran --- */
 .saran {
     background-color: #1A1F3C;
-    padding: 20px 0; /* UBAH: Mengurangi padding atas dan bawah dari 30px menjadi 20px */
+    padding: 20px 0;
     color: white;
     border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
@@ -256,11 +316,13 @@ body {
 }
 
 .description-saran {
-    font-size: 20px;
+    font-size: 15px;
+    /* Disesuaikan di media query */
 }
 
 .saran-poto {
-    max-width: 300px;
+    max-width: 180px;
+    /* Disesuaikan di media query */
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -286,111 +348,380 @@ body {
     padding-top: 25px;
     color: white;
 }
+
 .copyright-footer {
     background-color: #D4AF37;
     padding: 10px 0;
     color: #0A0F2C;
 }
+
 .head-footer {
     color: #D4AF37;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 .descript-footer {
-    font-size: 14px;
+    font-size: 11px;
+    /* Disesuaikan di media query */
     color: rgba(255, 255, 255, 0.7);
 }
+
 .login-admin {
     color: #D4AF37;
     text-decoration: none;
     transition: color 0.3s ease;
 }
+
 .login-admin:hover {
     color: #FFC107;
 }
+
 .copyright {
-    font-size: 13px;
+    font-size: 11px;
+    /* Disesuaikan di media query */
     color: #0A0F2C;
 }
 
+
 /* --- Media Queries --- */
-@media (max-width: 1400px) {
-    .hero-title { font-size: 3rem; }
-    .hero-subtitle { font-size: 1.3rem; }
-    .hero-image { max-width: 90%; }
-    .section-title { font-size: 2.2rem; }
-    .service-card .card-title, .feature-card .card-title { font-size: 1.4rem; }
-    .service-card .card-text, .feature-card .card-text { font-size: 0.95rem; }
-    .service-icon, .feature-icon { font-size: 3rem; }
+
+/* Desktop (min-width: 992px) */
+@media (min-width: 992px) {
+
+    /* Navbar Desktop */
+    .custom-navbar {
+        padding: 10px 70px;
+    }
+
+    .logo-navbar {
+        width: 210px;
+    }
+
+    .navbar-collapse {
+        position: static;
+        top: auto;
+        left: auto;
+        width: auto;
+        max-height: none;
+        overflow-y: visible;
+        border-top: none;
+        box-shadow: none;
+        background-color: transparent;
+        text-align: end;
+        display: flex !important;
+    }
+
+    .navbar-nav {
+        flex-direction: row !important;
+        width: auto;
+        align-items: center !important;
+    }
+
+    .navbar-nav .nav-item {
+        width: auto;
+        text-align: end;
+        margin-bottom: 0;
+    }
+
+    .order-button {
+        width: auto;
+        margin-left: initial !important;
+        margin-right: initial !important;
+        display: inline-block;
+    }
+
+    /* Hero Section Desktop */
+    .hero-new {
+        padding-top: 100px;
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .hero-new .container .row {
+        flex-direction: row;
+        /* Teks di kiri, Gambar di kanan */
+        text-align: start;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hero-new .container .row>div:first-child {
+        order: initial;
+    }
+
+    /* Kolom teks */
+    .hero-new .container .row>div:last-child {
+        order: initial;
+    }
+
+    /* Kolom gambar */
+    .hero-image {
+        max-width: 80%;
+        margin-bottom: 0;
+    }
+
+    .hero-title,
+    .hero-subtitle,
+    .hero-button {
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        margin-top: 0;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .hero-button {
+        font-size: 1.25rem;
+        padding: 15px 30px;
+        margin-top: 40px !important;
+    }
+
+    /* Ukuran Font dan Padding Desktop */
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .service-card,
+    .feature-card {
+        padding: 25px;
+        margin-bottom: 24px;
+    }
+
+    .service-icon,
+    .feature-icon {
+        font-size: 3.5rem;
+    }
+
+    .service-card .card-title,
+    .feature-card .card-title {
+        font-size: 1.5rem;
+    }
+
+    .service-card .card-text,
+    .feature-card .card-text {
+        font-size: 1rem;
+    }
+
+    .feature-button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    .saran-poto {
+        max-width: 300px;
+    }
+
+    .description-saran {
+        font-size: 20px;
+    }
+
+    .head-footer {
+        font-size: 1rem;
+    }
+
+    .descript-footer {
+        font-size: 0.875rem;
+    }
+
+    .copyright {
+        font-size: 0.8125rem;
+    }
 }
 
-@media (max-width: 1200px) {
-    .custom-navbar { padding: 10px 30px; }
-    .logo-navbar { width: 180px; }
-    .hero-title { font-size: 2.8rem; }
-    .hero-subtitle { font-size: 1.2rem; }
-    .hero-image { max-width: 100%; }
-    .section-title { font-size: 2rem; }
-    .service-card, .feature-card { padding: 20px; }
-    .service-card .card-title, .feature-card .card-title { font-size: 1.3rem; }
-    .service-card .card-text, .feature-card .card-text { font-size: 0.9rem; }
-    .service-icon, .feature-icon { font-size: 2.5rem; }
-    .feature-button { padding: 8px 20px; font-size: 0.95rem; }
-}
+/* Mobile/Tablet (max-width: 991.98px) - Mobile-First Overrides */
+@media (max-width: 991.98px) {
+    .custom-navbar {
+        padding: 10px 15px;
+    }
 
-@media (max-width: 992px) { /* Medium devices (tablets) */
-    body { padding-top: 0; }
-    .custom-navbar { padding: 10px 15px; }
+    .logo-navbar {
+        width: 150px;
+    }
+
+    /* Navbar Collapse Mobile */
     .navbar-collapse {
         background-color: #0d0f2b;
         padding: 1rem;
-        text-align: center;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        max-height: calc(100vh - 56px);
+        z-index: 1020;
+        /* Hapus text-align dari sini, atur di navbar-nav */
     }
-    .navbar-nav { align-items: center !important; }
-    .hero-new { min-height: 70vh; padding-top: 30px; padding-bottom: 30px;}
-    .hero-title { font-size: 2.2rem; margin-top: 1.5rem; }
-    .hero-subtitle { font-size: 1rem; }
-    .hero-button { padding: 12px 25px; font-size: 1rem; }
-    .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
-    .service-card, .feature-card { margin-bottom: 20px; }
-    .service-icon, .feature-icon { font-size: 3rem; }
-    .saran { padding: 20px 0; } /* UBAH: Mengurangi padding di breakpoint ini juga */
-    .image-saran { margin-bottom: 20px; }
-    .description-saran { text-align: center; font-size: 18px; }
-    .hero-image { margin-bottom: 20px; }
-    .saran-poto { max-width: 250px; }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        width: 100%;
+        align-items: flex-end !important;
+        /* UBAH: Rata kanan item menu */
+        text-align: end;
+        /* UBAH: Rata kanan teks di dalam nav-item */
+    }
+
+    .navbar-nav .nav-item {
+        width: auto;
+        /* Lebar otomatis */
+        margin-bottom: 0.5rem;
+    }
+
+    .order-button {
+        width: auto;
+        /* Lebar otomatis */
+        margin-left: auto !important;
+        /* Dorong ke kanan */
+        margin-right: 0 !important;
+        /* Pastikan tidak ada margin kanan yang menimpa */
+        display: block;
+    }
+
+    /* Hero Section Mobile */
+    .hero-new {
+        padding-top: 80px;
+        padding-bottom: 30px;
+    }
+
+    .hero-image {
+        max-width: 250px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        margin-top: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-button {
+        margin-top: 15px !important;
+    }
+
+    /* Font dan Padding Mobile */
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .service-card,
+    .feature-card {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .service-icon,
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+
+    .service-card .card-title,
+    .feature-card .card-title {
+        font-size: 1.2rem;
+    }
+
+    .service-card .card-text {
+        font-size: 0.9rem;
+    }
+
+    .feature-button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+
+    .saran-poto {
+        max-width: 180px;
+    }
+
+    .description-saran {
+        font-size: 15px;
+    }
+
+    .footer-home {
+        padding-top: 15px;
+    }
+
+    .head-footer {
+        font-size: 1.1rem;
+    }
+
+    .descript-footer {
+        font-size: 11px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
 }
 
-@media (max-width: 768px) { /* Small devices (portrait phones, less than 768px) */
-    .logo-navbar { width: 150px; }
-    .hero-title { font-size: 2rem; }
-    .hero-subtitle { font-size: 0.9rem; }
-    .hero-image { max-width: 90%; }
-    .section-title { font-size: 1.6rem; }
-    .service-card, .feature-card { padding: 15px; }
-    .service-card .card-title, .feature-card .card-title { font-size: 1.2rem; }
-    .service-card .card-text { font-size: 0.9rem; }
-    .service-icon, .feature-icon { font-size: 2.5rem; }
-    .feature-button { padding: 8px 18px; font-size: 0.9rem; }
-    .saran-poto { max-width: 200px; }
-    .description-saran { font-size: 15px; }
-    .footer-home { padding-top: 15px; }
-    .head-footer { font-size: 1.1rem; }
-    .descript-footer { font-size: 11px; }
-}
+/* Extra small devices (max-width: 575.98px) */
+@media (max-width: 575.98px) {
+    .logo-navbar {
+        width: 120px;
+    }
 
-@media (max-width: 576px) { /* Extra small devices (portrait phones, less than 576px) */
-    .custom-navbar { padding: 8px 10px; }
-    .logo-navbar { width: 120px; }
-    .hero-new { min-height: 60vh; }
-    .hero-title { font-size: 1.8rem; }
-    .hero-subtitle { font-size: 0.8rem; }
-    .hero-button { padding: 10px 20px; font-size: 0.9rem; }
-    .why-choose-us-section, .main-features-section { padding-top: 40px; padding-bottom: 40px; }
-    .section-title { font-size: 1.4rem; }
-    .service-icon, .feature-icon { font-size: 2rem; }
-    .service-card { padding: 20px; }
-    .saran-poto { max-width: 180px; }
-    .instagram-btn { padding: 5px 20px; font-size: 0.9rem; }
-    .footer-home .col-md-3 { margin-bottom: 15px; }
+    .custom-navbar {
+        padding: 8px 10px;
+    }
+
+    .hero-new {
+        padding-top: 80px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .hero-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .why-choose-us-section,
+    .main-features-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .service-icon,
+    .feature-icon {
+        font-size: 2rem;
+    }
+
+    .service-card {
+        padding: 20px;
+    }
+
+    .saran-poto {
+        max-width: 150px;
+    }
+
+    .instagram-btn {
+        padding: 5px 20px;
+        font-size: 0.9rem;
+    }
+
+    .footer-home .col-md-3 {
+        margin-bottom: 15px;
+    }
 }

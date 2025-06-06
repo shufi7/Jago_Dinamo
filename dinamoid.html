@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css" />
+    <!-- UBAH PEMANGGILAN CSS KE dinamoid.css -->
+    <link rel="stylesheet" href="/komponen/style/main/dinamoid.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Tambahkan CSS AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <title>JagoDinamo.Id - Solusi Perbaikan Dinamo Mobil</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama navbar-dark">
+        <!-- Tambahkan navbar-dark -->
+        <div class="container-fluid d-flex justify-content-between">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center text-white" href="dinamoid.html">
+                <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
+            </a>
+
+            <!-- Toggler (Kanan) -->
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu (Muncul Kanan di Mobile) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-end">
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="/diagnosis.html">Diagnosis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="/progres.html">Periksa Progres
+                            Perbaikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/pemesanan.html" class="btn order-button mt-2 mt-lg-0">Order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten Utama Halaman -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-new text-white d-flex align-items-center justify-content-center">
+            <div class="hero-overlay"></div>
+            <div class="container z-index-100 position-relative">
+                <div class="row align-items-center">
+                    <!-- Kolom Gambar: Tampilkan di atas pada mobile (order-first), di kanan pada desktop (order-md-last) -->
+                    <div class="col-md-6 text-center order-first order-md-last" data-aos="fade-left"
+                        data-aos-delay="200">
+                        <img src="/komponen/image/logow.png" alt="Mesin Mobil Dinamo Starter"
+                            class="hero-image mb-4 mb-md-0">
+                    </div>
+                    <!-- Kolom Teks: Tampilkan di bawah pada mobile (order-last), di kiri pada desktop (order-md-first) -->
+                    <div class="col-md-6 text-center text-md-start order-last order-md-first" data-aos="fade-right">
+                        <h1 class="display-3 hero-title">Perbaikan Dinamo Mobil, <span class="text-warning">Solusi
+                                Tercepat.</span></h1>
+                        <p class="lead hero-subtitle">JagoDinamo.Id</p>
+                        <a href="/pemesanan.html" class="btn btn-warning btn-lg hero-button mt-4">Order Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section "Mengapa Memilih Kami?" -->
+        <section class="why-choose-us-section py-5 text-white">
+            <div class="container">
+                <h2 class="text-center mb-5 section-title" data-aos="fade-up">Mengapa Memilih Kami?</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card service-card text-center p-4">
+                            <i class="fas fa-bolt service-icon mb-3"></i>
+                            <h3 class="card-title">Perbaikan Cepat</h3>
+                            <p class="card-text">Teknisi kami sigap datang ke lokasi Anda dengan respon tercepat.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card service-card text-center p-4">
+                            <i class="fas fa-star service-icon mb-3"></i>
+                            <h3 class="card-title">Jaminan Kualitas</h3>
+                            <p class="card-text">Kami menggunakan suku cadang terbaik dan teknisi berpengalaman.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card service-card text-center p-4">
+                            <i class="fas fa-tags service-icon mb-3"></i>
+                            <h3 class="card-title">Harga Transparan</h3>
+                            <p class="card-text">Biaya perbaikan jelas di awal, tanpa ada biaya tersembunyi.</p>
+                            -
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Fitur Utama (Diagnosis, Order, Progres) -->
+        <section class="main-features-section py-5 text-white">
+            <div class="container">
+                <h2 class="text-center mb-5 section-title" data-aos="fade-up">Layanan Utama Kami</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card feature-card text-white d-flex flex-column h-100">
+                            <i class="fas fa-magnifying-glass-plus feature-icon mb-3"></i>
+                            <h3 class="card-title">Diagnosis Cepat</h3>
+                            <p class="card-text">Kami akan membantu menganalisis apa saja kerusakan pada dinamo mobil
+                                Anda dengan cepat dan akurat.</p>
+                            <div class="mt-auto">
+                                <a href="/diagnosis.html" class="btn feature-button mt-3">Mulai Diagnosis</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card feature-card text-white d-flex flex-column h-100">
+                            <i class="fas fa-clipboard-list feature-icon mb-3"></i>
+                            <h3 class="card-title">Pesan Layanan</h3>
+                            <p class="card-text">Teknisi profesional kami siap datang ke lokasi Anda untuk perbaikan di
+                                tempat, tanpa perlu ke bengkel.</p>
+                            <div class="mt-auto">
+                                <a href="/pemesanan.html" class="btn feature-button mt-3">Pesan Sekarang</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card feature-card text-white d-flex flex-column h-100">
+                            <i class="fas fa-chart-line feature-icon mb-3"></i>
+                            <h3 class="card-title">Cek Progres Perbaikan</h3>
+                            <p class="card-text">Pantau status perbaikan mobil Anda secara real-time dari mana saja,
+                                kapan saja.</p>
+                            <div class="mt-auto">
+                                <a href="/progres.html" class="btn feature-button mt-3">Cek Progres</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Saran dan Masukan -->
+        <section class="saran">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-10" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="image-saran col-md-6 col-sm-12 text-center" data-aos="fade-right">
+                                <img src="/komponen/image/keluhandansaran.png" alt="Saran" class="saran-poto">
+                            </div>
+                            <div class="description-saran col-md-6 col-sm-12" data-aos="fade-left" data-aos-delay="200">
+                                <h1 class="title-saran ">
+                                    Saran dan Masukan
+                                </h1>
+                                Kamu punya saran dan masukkan tentang web ini ? <br>
+                                yuu kontak kami, melalui email yang tertera, atau langsung tekan tombol ini,
+                                untuk masuk ke instagram resmi kami yaaa. <br>
+                                <a href="#" class="btn instagram-btn text-white mt-2">instagram</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-home text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Bengkel Jago Dinamo
+                    </p>
+                    <p class="descript-footer">
+                        Jl. A. Yani Km. 8, Banjarmasin <br>
+                        Kalimantan Selatan
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Jam Operasional
+                    </p>
+                    <p class="descript-footer">
+                        - Senin - Sabtu : 08.00 - 17.00 <br>
+                        - Minggu & Libur Nasional : Tutup
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Kontak
+                    </p>
+                    <p class="descript-footer">
+                        Email : jagodinamo@jdn.id <br>
+                        Telp/Wa : 0812 3456 7890
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <p class="head-footer">
+                        Owner
+                    </p>
+                    <p class="descript-footer">
+                        Muhammad Johannes Robar <br>
+                        <a class="login-admin" href="/loginadmin.html">Login Admin JagoDinamo.Id</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-footer">
+            <div class="col-md-12">
+                <p class="copyright text-center">
+                    © 2025 JagoDinamo.Id. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, // Durasi animasi
+            once: true // Animasi hanya berjalan sekali saat discroll
+        });
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("shadow");
+                navbar.style.backgroundColor = '#0A0F2C';
+            } else {
+                navbar.classList.remove("shadow");
+                navbar.style.backgroundColor = 'transparent';
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS Bundle (wajib untuk burger menu berfungsi) -->
+    <!-- Bootstrap Bundle JS (WAJIB agar burger menu berfungsi) -->
+    <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

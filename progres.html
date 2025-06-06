@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/komponen/style/main/pemesanan.css">
     <style>
-        /* Tambahkan style kustom untuk progres.html jika diperlukan */
+        /* Style kustom untuk progres.html */
         .result-card {
             border: 1px solid #D4AF37;
             background-color: #0A0F2C;
@@ -56,6 +56,36 @@
             background-color: #ffc107 !important; /* Warning yellow */
             border-color: #ffc107 !important;
         }
+
+        /* ============================================== */
+        /* --- KODE ANIMASI TAMBAHAN UNTUK HALAMAN INI --- */
+        /* ============================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Membuat elemen tidak terlihat saat halaman pertama kali dimuat */
+        .page-title-container h1,
+        .result-card {
+            opacity: 0;
+        }
+
+        /* Menerapkan animasi dengan jeda waktu agar muncul bertahap */
+        body .page-title-container h1 {
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        }
+
+        body .result-card {
+            animation: fadeInUp 0.7s ease-out 0.4s forwards;
+        }
+
     </style>
 
     <script type="module">

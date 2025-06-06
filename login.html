@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/komponen/style/main/login.css">
-    <title>Login - JagoDinamoId</title>
+    <link rel="stylesheet" href="/komponen/style/main/loginadmin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>Login Admin - JagoDinamo.Id</title>
 </head>
+
 <body>
-    <div class="container mt-5 mx-6 col-lg-12 py-5">
-        <div class="row align-items-center login-admin">
-            <div class="col-md-6 text-center">
-                <img src="/komponen/image/Login.png" alt="logo" class="image-login">
-            </div>
-            <div class="col-md-6">
-                <div class="card card-login">
-                    <img src="/komponen/image/logo2.png" alt="logo" class="logo">
-                    <p class=" text-center log-head">JagoDinamo.id</p>
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label class="form-label">Alamat Email : </label>
-                            <input type="email" class="form-control" id="email" placeholder="Email">
+    <div class="login-wrapper">
+        <div class="row h-100 g-0"> 
+            <div class="col-lg-8 login-left-column">
+                <div class="login-left-overlay"></div> 
+                <div class="login-form-container d-flex justify-content-center align-items-center h-100">
+                    <div class="card login-card animate-on-load"> 
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <h2 class="login-welcome-text">LOGIN ADMIN</h2>
+                            </div>
+                            <form id="loginForm">
+                                <div class="mb-3 input-group-icon">
+                                    <input type="text" class="form-control login-input" id="email"
+                                        placeholder="Username" required>
+                                    <span class="input-icon"><i class="fas fa-user"></i></span>
+                                </div>
+                                <div class="mb-3 input-group-icon">
+                                    <input type="password" class="form-control login-input" id="password"
+                                        placeholder="Password" required>
+                                    <span class="input-icon"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <div
+                                    class="d-flex justify-content-between align-items-center mb-4 remember-forgot-section">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <p id="error-message" class="text-danger text-center mb-3" style="display: none;"></p>
+                                <button type="submit" class="btn login-button w-100 fw-bold text-white">SUBMIT</button>
+                                <div class="text-center mt-3 register-link-section">
+                                    © 2025 JagoDinamo.Id. All rights reserved.
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password : </label>
-                            <input type="password" class="form-control" id="password" placeholder="Kata Sandi">
-                        </div>
-                        <p id="error-message" style="color: red; display: none;" class="text-center"></p>
-                        <button type="submit" class="btn w-100 fw-bold">Masuk</button>
-                        <p class="text-center mt-3 small-text">All Rights Reserved. Copyright By JagoDinamo.Id</a>
-                        </p>
-                    </form>
+                    </div>
                 </div>
+            </div>
+            <div class="col-lg-4 login-right-column d-flex justify-content-center align-items-center">
+                .
             </div>
         </div>
     </div>
 
+    <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Mencegah form melakukan submit default
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const errorMessage = document.getElementById("error-message");
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
 
-        const validEmail = "Jago@Dinamo.id";
-        const validPassword = "admin1234";
+            const validEmail = "jagodinamo@jdn.id";
+            const validPassword = "jagobanget";
 
-        if (email === validEmail && password === validPassword) {
-            // Redirect ke halaman utama
-            window.location.href = "admin.html"; // Ganti sesuai nama file halaman utama
-        } else {
-            // Tampilkan pesan error
-            errorMessage.style.display = "block";
-            errorMessage.textContent = "Masukkan email atau password nya dengan benar";
-        }
-    });
+            if (email === validEmail && password === validPassword) {
+                window.location.href = "admin.html";
+            } else {
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Username atau password salah. Silakan coba lagi.";
+            }
+        });
     </script>
-
-    <script src="/komponen/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

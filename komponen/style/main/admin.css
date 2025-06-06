@@ -1,210 +1,514 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Navbar Home Page*/
 /* Background dan padding navbar */
 * {
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
+/* admin.css */
+
+/* --- Umum / Reset untuk body --- */
 body {
-    padding-top: 80px;
-    background-color: #0A0F2C;
-    /* Sesuaikan dengan tinggi navbar */
-}
-.shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-utama {
-    margin: 0;
+  background-color: #0A0F2C;
+  /* Background utama halaman */
+  color: white;
+  /* Teks default halaman */
+  overflow-x: hidden;
+  /* Mencegah scroll horizontal yang tidak diinginkan */
 }
 
+/* --- Styling Navbar (Fixed Top) --- */
 .custom-navbar {
-    background-color: #0A0F2C;
-    padding: 5px 70px;
+  background-color: #0A0F2C;
+  /* Background utama navbar */
+  border-bottom: 1px solid #D4AF37;
+  /* Garis bawah navbar */
+  transition: box-shadow 0.3s ease;
+  /* Transisi untuk shadow */
+  z-index: 1050;
+  /* Pastikan navbar di atas sidebar dan konten */
+  width: 100%;
+  /* Pastikan navbar memenuhi lebar */
 }
 
-.logo-navbar {
-    width: 210px;
+.custom-navbar.shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* Bayangan navbar saat scroll */
 }
 
-/* Link nav */
+.custom-navbar .navbar-brand {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.custom-navbar .navbar-brand img.logo-navbar {
+  height: 40px;
+  background-color: transparent;
+  margin-right: 8px;
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 .custom-navbar .nav-link {
-    font-weight: 400;
-    font-size: 16px;
+  color: white !important;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
 }
 
-.button-text {
-    color: #ffffff;
+.custom-navbar .nav-link:hover {
+  color: #D4AF37 !important;
 }
 
-.button-text:hover {
-    color: #D4AF37;
+/* --- Wrapper Utama Admin (untuk sidebar dan konten) --- */
+.wrapper-admin {
+  display: flex;
+  min-height: 100vh;
+  /* Tidak perlu padding-top di sini, karena content-admin yang akan diberi padding */
 }
 
-/* Tombol Order */
-.custom-navbar {
-    background-color: #0d0f2b;
-    padding: 10px 20px;
+/* --- Sidebar Admin --- */
+.sidebar-admin {
+  background-color: #1A1F3C;
+  color: white;
+  width: 250px;
+  /* Lebar sidebar */
+  flex-shrink: 0;
+  /* Agar sidebar tidak mengecil */
+  padding: 20px;
+  border-right: 1px solid #D4AF37;
+  position: fixed;
+  /* Sidebar fixed */
+  top: 56px;
+  /* Di bawah navbar */
+  bottom: 0;
+  overflow-y: auto;
+  /* Scroll jika konten sidebar banyak */
+  z-index: 1020;
+  /* Di atas konten utama */
 }
 
-.order-button {
-    background: #D4AF37;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    padding: 8px 20px;
-    border: none;
-    transition: 0.3s;
-}
-
-.order-button:hover {
-    background: #ffffff;
-    color: #000000;
-}
-
-.navbar-toggler {
-    border: none;
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.order-table {
-    border: #0d0f2b;
-}
-/* Tabel Admin */
-.table-admin {
-  background-color: #0A0F2C;
-  color: #fff;
-}
-
-/* Table style */
-.table-admin .table {
-  background-color: #0A0F2C;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #D4AF37;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* Header tabel */
-.table-admin .table thead {
-  background-color: #1c1f2f;
+.sidebar-admin h5 {
   color: #D4AF37;
 }
 
-/* Header th */
-.table-admin .table thead th {
-  border-top: 1px solid #D4AF37;
-  border-bottom: 1px solid #D4AF37;
-  padding: 16px;
-  text-align: center;
+.sidebar-admin .nav-link {
+  color: white;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
-/* Border samping header */
-.table-admin .table thead th:first-child {
-  border-left: 1px solid #D4AF37;
-  border-top-left-radius: 12px;
-}
-.table-admin .table thead th:last-child {
-  border-right: 1px solid #D4AF37;
-  border-top-right-radius: 12px;
+.sidebar-admin .nav-link:hover,
+.sidebar-admin .nav-link.active {
+  background-color: #D4AF37;
+  color: #0A0F2C;
 }
 
-/* Isi tabel */
-.table-admin .table tbody td {
+.sidebar-admin .nav-link i {
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+/* --- Konten Utama (Berisi Tabel, dll.) --- */
+.content-admin {
+  flex-grow: 1;
+  padding: 20px;
+  /* Padding default untuk konten */
+  margin-left: 250px;
+  /* Dorong konten agar tidak tertutup sidebar */
+  padding-top: 76px;
+  /* Tambahan padding atas untuk ruang dari navbar fixed */
   background-color: #0A0F2C;
-  color: #fff;
-  border-top: 1px solid #D4AF37;
-  border-bottom: 1px solid #D4AF37;
-  padding: 16px;
-  vertical-align: middle;
+  /* Pastikan background konten sama dengan body */
+  color: white;
 }
 
-/* Border samping isi */
-.table-admin .table tbody td:first-child {
-  border-left: 1px solid #D4AF37;
-}
-.table-admin .table tbody td:last-child {
-  border-right: 1px solid #D4AF37;
+.content-admin h2 {
+  color: #D4AF37;
 }
 
-/* Hover efek */
-.table-admin .table tbody tr:hover {
-  background-color: #131a33;
+/* --- Styling Tabel Admin (untuk admin.html dan adminprogres.html) --- */
+/* section.table-admin kini ada di dalam content-admin */
+.table-admin {
+  padding: 0;
+  /* Hapus padding dari section, karena sudah ada di content-admin */
+  margin: 0;
+  /* Hapus margin default */
 }
 
-/* Select */
-.table-admin .form-select {
+.table-admin .table {
   background-color: #0A0F2C;
-  color: #fff;
   border: 1px solid #D4AF37;
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  /* UKURAN FONT TABEL LEBIH KECIL */
 }
 
-.table-admin .form-select:focus {
-  border-color: #D4AF37;
-  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+.table-admin .table th,
+.table-admin .table td {
+  border: 1px solid #D4AF37;
+  color: white;
+  vertical-align: middle;
+  padding: 0.5rem;
+  /* UKURAN PADDING SEL LEBIH KECIL */
+}
+
+.table-admin .table thead {
+  background-color: #1A1F3C;
+}
+
+.table-admin .table thead th {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Input field di tabel (untuk progres, kerusakan, harga) */
+.table-admin .form-control-sm,
+.table-admin .form-select-sm {
+  background-color: #1A1F3C;
+  border: 1px solid #D4AF37;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  /* Padding input lebih kecil */
+  font-size: 0.8rem;
+  /* Ukuran font input lebih kecil */
+}
+
+.table-admin .form-control-sm::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.table-admin .form-select-sm option {
+  background-color: #1A1F3C;
+  color: white;
+}
+
+/* Tombol di tabel */
+.table-admin .btn-primary,
+.table-admin .btn-success,
+.table-admin .btn-danger {
+  padding: 0.25rem 0.5rem;
+  /* Padding tombol lebih kecil */
+  font-size: 0.75rem;
+  /* Ukuran font tombol lebih kecil */
+  line-height: 1.5;
+  /* Sesuaikan line-height */
+  border-radius: 0.25rem;
+  /* Radius sudut tombol */
+}
+
+
+/* Ikon centang/silang di tabel admin.html */
+.table-admin .text-success {
+  color: #28a745 !important;
+}
+
+.table-admin .text-danger {
+  color: #dc3545 !important;
+}
+
+.table-admin .fs-4 {
+  /* Jika fs-4 terlalu besar, bisa disesuaikan */
+  font-size: 1.25rem !important;
+  /* Ukuran ikon sedikit lebih kecil */
+}
+
+
+/* --- Kustomisasi Toast Notifikasi --- */
+.toast-container {
+  z-index: 1080;
+}
+
+.toast {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+
+.toast.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+.toast.bg-danger {
+  background-color: #dc3545 !important;
+  color: white;
+}
+
+.toast-body {
+  font-weight: 500;
+}
+
+.toast .btn-close {
+  filter: invert(1);
+  opacity: 1;
+}
+
+
+/* --- Kustomisasi Modal Konfirmasi Hapus --- */
+.modal-content {
+  background-color: #0A0F2C;
+  border: 1px solid #D4AF37;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+}
+
+.modal-header {
+  background-color: #0A0F2C;
+  border-bottom: 1px solid #D4AF37;
+  color: white;
+  padding: 1rem;
+}
+
+.modal-header .modal-title {
+  color: white;
+  font-weight: bold;
+}
+
+.modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 1;
+}
+
+.modal-body {
+  background-color: #0A0F2C;
+  color: white;
+  padding: 1rem;
+}
+
+.modal-footer {
+  background-color: #0A0F2C;
+  border-top: 1px solid #D4AF37;
+  padding: 1rem;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #495057;
+  border-color: #495057;
+}
+
+.modal-footer .btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-footer .btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+
+  /* Navbar di mobile */
+  .custom-navbar .navbar-brand {
+    font-size: 1rem;
+  }
+
+  /* Sidebar di mobile */
+  .wrapper-admin {
+    flex-direction: column;
+    /* Sidebar di atas konten */
+    padding-top: 0;
+    /* Navbar akan di atas sidebar */
+  }
+
+  .sidebar-admin {
+    width: 100%;
+    height: auto;
+    position: static;
+    /* Tidak fixed lagi */
+    border-right: none;
+    border-bottom: 1px solid #D4AF37;
+    padding-top: 60px;
+    /* Beri ruang dari navbar fixed */
+  }
+
+  .content-admin {
+    margin-left: 0;
+    /* Hapus margin kiri */
+    padding-top: 20px;
+    /* Padding biasa */
+  }
+
+  .table-admin {
+    margin-left: 0;
+    /* Hapus margin kiri tabel */
+    padding-top: 0;
+    /* Padding biasa */
+  }
+
+  /* Sesuaikan ukuran font tabel di mobile jika masih terlalu besar */
+  .table-admin .table {
+    font-size: 0.75rem;
+    /* Lebih kecil lagi di mobile */
+  }
+
+  .table-admin .table th,
+  .table-admin .table td {
+    padding: 0.3rem;
+    /* Padding sel lebih kecil di mobile */
+  }
+
+  .table-admin .form-control-sm,
+  .table-admin .form-select-sm {
+    font-size: 0.7rem;
+    /* Input lebih kecil di mobile */
+    padding: 0.2rem 0.4rem;
+  }
+
+  .table-admin .btn-primary,
+  .table-admin .btn-success,
+  .table-admin .btn-danger {
+    padding: 0.2rem 0.4rem;
+    /* Tombol lebih kecil di mobile */
+    font-size: 0.7rem;
+  }
+
+  .table-admin .fs-4 {
+    font-size: 1rem !important;
+    /* Ikon lebih kecil di mobile */
+  }
 }
 
 /* Latar belakang dan border utama modal */
 .modal-content {
-    background-color: #0A0F2C; /* Background gelap */
-    border: 1px solid #D4AF37; /* Garis emas */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Tambah bayangan agar lebih menonjol */
+  background-color: #0A0F2C;
+  /* Background gelap */
+  border: 1px solid #D4AF37;
+  /* Garis emas */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  /* Tambah bayangan agar lebih menonjol */
 }
 
 /* Header modal */
 .modal-header {
-    background-color: #0A0F2C; /* Background gelap */
-    border-bottom: 1px solid #D4AF37; /* Garis bawah header emas */
-    color: white; /* Teks judul putih */
-    padding: 1rem; /* Padding standar Bootstrap */
+  background-color: #0A0F2C;
+  /* Background gelap */
+  border-bottom: 1px solid #D4AF37;
+  /* Garis bawah header emas */
+  color: white;
+  /* Teks judul putih */
+  padding: 1rem;
+  /* Padding standar Bootstrap */
 }
 
 .modal-header .modal-title {
-    color: white; /* Pastikan teks judul putih */
-    font-weight: bold; /* Judul lebih tebal */
+  color: white;
+  /* Pastikan teks judul putih */
+  font-weight: bold;
+  /* Judul lebih tebal */
 }
 
 /* Tombol close (X) di header modal */
 .modal-header .btn-close {
-    filter: invert(1) grayscale(100%) brightness(200%); /* Membuat ikon X putih */
-    opacity: 1; /* Pastikan terlihat jelas */
+  filter: invert(1) grayscale(100%) brightness(200%);
+  /* Membuat ikon X putih */
+  opacity: 1;
+  /* Pastikan terlihat jelas */
 }
 
 /* Body modal */
 .modal-body {
-    background-color: #0A0F2C; /* Background gelap */
-    color: white; /* Teks isi putih */
-    padding: 1rem; /* Padding standar Bootstrap */
+  background-color: #0A0F2C;
+  /* Background gelap */
+  color: white;
+  /* Teks isi putih */
+  padding: 1rem;
+  /* Padding standar Bootstrap */
 }
 
 /* Footer modal */
 .modal-footer {
-    background-color: #0A0F2C; /* Background gelap */
-    border-top: 1px solid #D4AF37; /* Garis atas footer emas */
-    padding: 1rem; /* Padding standar Bootstrap */
+  background-color: #0A0F2C;
+  /* Background gelap */
+  border-top: 1px solid #D4AF37;
+  /* Garis atas footer emas */
+  padding: 1rem;
+  /* Padding standar Bootstrap */
 }
 
 /* Tombol "Batal" di modal footer */
 .modal-footer .btn-secondary {
-    background-color: #343a40; /* Warna abu-abu gelap */
-    border-color: #343a40;
-    color: white;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: #343a40;
+  /* Warna abu-abu gelap */
+  border-color: #343a40;
+  color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .modal-footer .btn-secondary:hover {
-    background-color: #495057; /* Sedikit lebih terang saat hover */
-    border-color: #495057;
+  background-color: #495057;
+  /* Sedikit lebih terang saat hover */
+  border-color: #495057;
 }
 
 /* Tombol "Hapus" di modal footer */
 /* .modal-footer .btn-danger { */
-    /* Biarkan warna merah default Bootstrap atau sesuaikan jika perlu */
-    /* Contoh jika ingin kustom: */
-    /* background-color: #dc3545; */
-    /* border-color: #dc3545; */
-    /* color: white; */
+/* Biarkan warna merah default Bootstrap atau sesuaikan jika perlu */
+/* Contoh jika ingin kustom: */
+/* background-color: #dc3545; */
+/* border-color: #dc3545; */
+/* color: white; */
 /* } */
+
+/* admin.css */
+
+/* --- Styling Navbar --- */
+.custom-navbar {
+  background-color: #0A0F2C;
+  /* Background utama navbar */
+  border-bottom: 1px solid #D4AF37;
+  /* Garis bawah navbar */
+}
+
+.custom-navbar .navbar-brand {
+  /* Pastikan tidak ada background putih di sini */
+  background-color: transparent;
+  /* Pastikan transparan */
+  padding: 0;
+  /* Hapus padding jika menyebabkan area ekstra */
+  margin: 0;
+  /* Hapus margin jika menyebabkan area ekstra */
+  display: flex;
+  align-items: center;
+}
+
+.custom-navbar .navbar-brand img.logo-navbar {
+  height: 40px;
+  /* Sesuaikan tinggi logo */
+  /* Pastikan tidak ada background putih pada gambar itu sendiri */
+  background-color: transparent;
+  /* Sangat penting untuk gambar itu sendiri */
+}
+
+/* Bagian lain dari navbar, sidebar, modal, dll. (tetap sama) */
+/* ... */

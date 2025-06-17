@@ -5,10 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css" />
-    <!-- UBAH PEMANGGILAN CSS KE dinamoid.css -->
     <link rel="stylesheet" href="/komponen/style/main/dinamoid.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <!-- Tambahkan CSS AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <title>JagoDinamo.Id - Solusi Perbaikan Dinamo Mobil</title>
 </head>
@@ -220,12 +218,12 @@
         </div>
     </footer>
 
-    <!-- AOS JS -->
+    <!-- Animasi JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 800, // Durasi animasi
-            once: true // Animasi hanya berjalan sekali saat discroll
+            duration: 800,
+            once: true 
         });
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
@@ -238,9 +236,6 @@
             }
         });
     </script>
-
-    <!-- Bootstrap JS Bundle (wajib untuk burger menu berfungsi) -->
-    <!-- Bootstrap Bundle JS (WAJIB agar burger menu berfungsi) -->
     <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 </body>

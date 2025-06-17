@@ -7,7 +7,7 @@
     padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
 }
 
-/* Sidebar Admin - Gaya umum dari admin.css, tapi di-override jika perlu */
+/* Sidebar Admin - Gaya umum dari admin.css */
 .sidebar-admin {
     /* Gaya dari admin.css, tapi bisa di-override di sini jika ada perbedaan */
     background-color: #1A1F3C; 

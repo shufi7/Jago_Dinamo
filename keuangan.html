@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Link -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@
 </head>
 
 <body>
+    <!-- Navbar Seder -->
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama navbar-dark">
         <div class="container-fluid d-flex justify-content-between">
             <a class="navbar-brand d-flex align-items-center text-white" href="login.html">
@@ -54,6 +56,7 @@
     </nav>
 
     <div class="wrapper-admin">
+        <!-- Navbar Dikiri -->
         <nav class="sidebar-admin">
             <div class="d-flex flex-column h-100">
                 <h5 class="mb-4 text-center">Menu Admin</h5>
@@ -79,7 +82,8 @@
                 </ul>
             </div>
         </nav>
-
+        
+        <!-- Data Table -->
         <main class="content-admin">
             <section class="table-admin text-black py-4">
                 <div class="container-fluid">
@@ -108,6 +112,7 @@
         </main>
     </div>
 
+    <!-- Pop Up dibawah -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
@@ -117,6 +122,7 @@
         </div>
     </div>
 
+    <!-- Modal untuk mengisi dan merubah data dari arsip data perbaikan -->
     <div class="modal fade" id="financeModal" tabindex="-1" aria-labelledby="financeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content custom-modal-content">
@@ -183,7 +189,6 @@
     <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/komponen/script/keuangan.js" type="module"></script>
     <script>
-        // Script untuk sidebar admin, bisa dipindahkan ke main admin JS jika ada
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
             if (window.scrollY > 50) {

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/komponen/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/komponen/style/main/keuangan.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Keuangan Admin - JagoDinamo.Id</title>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCsbdGGAw-MOYt1LuiQ6bGZqmXiBQH6wVk",
+            authDomain: "jagodinamodata.firebaseapp.com",
+            databaseURL: "https://jagodinamodata-default-rtdb.firebaseio.com",
+            projectId: "jagodinamodata",
+            storageBucket: "jagodinamodata.firebasestorage.app",
+            messagingSenderId: "1045178326640",
+            appId: "1:1045178326640:web:e3abf0380697b738481eb5",
+            measurementId: "G-4XBR0MDY7L"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        window.firebaseDatabase = database;
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama navbar-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand d-flex align-items-center text-white" href="login.html">
+                <img src="/komponen/image/white logo.png" alt="Logo" class="me-2 logo-navbar" />
+                <span class="ms-2">Admin Panel</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAdmin" aria-controls="navbarNavAdmin" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAdmin">
+                <ul class="navbar-nav ms-auto text-end">
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-4 button-text text-white" href="login.html">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper-admin">
+        <nav class="sidebar-admin">
+            <div class="d-flex flex-column h-100">
+                <h5 class="mb-4 text-center">Menu Admin</h5>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="homeadmin.html" class="nav-link">
+                            <i class="bi bi-house-door-fill"></i> Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin.html" class="nav-link">
+                            <i class="bi bi-clipboard-check"></i> Pesanan Baru
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="adminprogres.html" class="nav-link"> 
+                            <i class="bi bi-hourglass-split"></i> Progres Perbaikan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="keuangan.html" class="nav-link active"> <i class="bi bi-cash-stack"></i> Keuangan </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="content-admin">
+            <section class="table-admin text-black py-4">
+                <div class="container-fluid">
+                    <h1 class="text-white mb-4">Data Keuangan & Pesanan Selesai</h1>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Nama Pelanggan</th>
+                                    <th>Jenis Kendaraan</th>
+                                    <th>Deskripsi Keluhan</th>
+                                    <th>Kerusakan</th>
+                                    <th>Progres</th>
+                                    <th>Harga Service</th>
+                                    <th>Harga Modal</th>
+                                    <th>Barang Dipakai</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financeTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="financeModal" tabindex="-1" aria-labelledby="financeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title text-white" id="financeModalLabel">Input Data Keuangan</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body custom-modal-body">
+                    <form id="financeForm">
+                        <input type="hidden" id="financeOrderId"> <div class="mb-3">
+                            <label for="modalNamaPelanggan" class="form-label text-white">Pelanggan:</label>
+                            <input type="text" class="form-control" id="modalNamaPelanggan" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalJenisKendaraan" class="form-label text-white">Kendaraan:</label>
+                            <input type="text" class="form-control" id="modalJenisKendaraan" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalKerusakan" class="form-label text-white">Kerusakan Awal:</label>
+                            <input type="text" class="form-control" id="modalKerusakan" readonly>
+                        </div>
+
+                        <hr class="my-4" style="border-color: rgba(212, 175, 55, 0.3);">
+                        
+                        <div class="mb-3">
+                            <label for="hargaService" class="form-label text-white">Harga Service (Rp):</label>
+                            <input type="number" class="form-control" id="hargaService" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hargaModal" class="form-label text-white">Harga Modal (Rp):</label>
+                            <input type="number" class="form-control" id="hargaModal" min="0" required>
+                        </div>
+
+                        <hr class="my-4" style="border-color: rgba(212, 175, 55, 0.3);">
+
+                        <h6 class="text-white mb-3">Barang Digunakan & Stok</h6>
+                        <div id="barangDigunakanContainer">
+                            <div class="row mb-3 barang-item-row">
+                                <div class="col-6">
+                                    <label for="barang1" class="form-label text-white visually-hidden">Nama Barang</label>
+                                    <input type="text" class="form-control barang-nama" placeholder="Nama Barang">
+                                </div>
+                                <div class="col-4">
+                                    <label for="stok1" class="form-label text-white visually-hidden">Stok</label>
+                                    <input type="number" class="form-control barang-stok" min="0" placeholder="Jumlah Stok">
+                                </div>
+                                <div class="col-2 d-flex align-items-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-barang-btn w-100"><i class="bi bi-x-lg"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-warning btn-sm mt-2" id="addBarangButton"><i class="bi bi-plus-lg"></i> Tambah Barang</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer custom-modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" form="financeForm" class="btn btn-success" id="saveFinanceDataButton">Simpan Data Keuangan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/komponen/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/komponen/script/keuangan.js" type="module"></script>
+    <script>
+        // Script untuk sidebar admin, bisa dipindahkan ke main admin JS jika ada
+        window.addEventListener("scroll", function () {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("shadow");
+            } else {
+                navbar.classList.remove("shadow");
+            }
+        });
+    </script>
+</body>
+</html>

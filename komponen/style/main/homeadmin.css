@@ -1,0 +1,138 @@
+/* CSS Kustom untuk homeadmin.html Dashboard */
+
+/* Responsive adjustments for overall admin wrapper */
+.wrapper-admin {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 56px; /* Sesuaikan dengan tinggi navbar */
+}
+
+/* Sidebar Admin - Gaya umum dari admin.css, tapi di-override jika perlu */
+.sidebar-admin {
+    /* Gaya dari admin.css, tapi bisa di-override di sini jika ada perbedaan */
+    background-color: #1A1F3C; 
+    color: white;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 20px;
+    border-right: 1px solid #D4AF37;
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 1020;
+}
+.sidebar-admin h5 {
+    color: #D4AF37; /* Judul menu sidebar */
+}
+.sidebar-admin .nav-link {
+    color: white; padding: 10px 15px; margin-bottom: 5px; border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; display: flex; align-items: center;
+}
+.sidebar-admin .nav-link:hover, .sidebar-admin .nav-link.active {
+    background-color: #D4AF37; color: #0A0F2C;
+}
+.sidebar-admin .nav-link i { margin-right: 10px; }
+
+
+/* Konten Utama Admin */
+.content-admin {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px; /* Dorong konten agar tidak tertutup sidebar */
+    padding-top: 76px; /* Tambahan padding atas untuk ruang dari navbar fixed */
+    /* background-color: #0A0F2C; */ /* Ambil dari admin.css */
+    /* color: white; */ /* Ambil dari admin.css */
+}
+.content-admin h1, .content-admin h2 {
+    color: #D4AF37; font-weight: bold;
+}
+
+
+/* --- Styling Dashboard Card (homeadmin.html) --- */
+.dashboard-card {
+    background-color: #1A1F3C; /* Warna card dashboard */
+    border: 1px solid #D4AF37; /* Border emas */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15); /* Shadow emas */
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    height: 100%; /* Memastikan tinggi card konsisten */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.dashboard-card .card-title {
+    color: #D4AF37; /* Judul card dashboard emas */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.dashboard-card .card-text.display-5 {
+    color: white; /* Angka besar putih */
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+    flex-grow: 1; /* Memastikan angka menempati ruang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dashboard-card .btn-outline-danger {
+    color: #dc3545; border-color: #dc3545;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dashboard-card .btn-outline-danger:hover {
+    background-color: #dc3545; color: white;
+}
+
+/* Styling Tabel Barang Digunakan di Dashboard */
+.dashboard-card .table {
+    background-color: transparent; /* Transparan */
+    border: none;
+    color: white;
+}
+.dashboard-card .table th, .dashboard-card .table td {
+    border-color: rgba(212, 175, 55, 0.3); /* Border tabel emas transparan */
+    color: white;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+.dashboard-card .table thead th {
+    background-color: rgba(212, 175, 55, 0.1); /* Background header tabel transparan */
+    color: #D4AF37;
+    font-weight: bold;
+}
+.dashboard-card .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(212, 175, 55, 0.05); /* Striped row transparan */
+}
+.dashboard-card .table-dark { /* Overrides Bootstrap's .table-dark */
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: transparent;
+    --bs-table-striped-color: white;
+    --bs-table-active-bg: transparent;
+    --bs-table-active-color: white;
+    --bs-table-hover-bg: transparent;
+    --bs-table-hover-color: white;
+    color: white;
+    border-color: rgba(212, 175, 55, 0.3);
+}
+.dashboard-card .table-dark th, .dashboard-card .table-dark td {
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+
+/* Responsive Adjustments untuk Dashboard */
+@media (max-width: 991.98px) { /* Tablet */
+    .dashboard-card { margin-bottom: 1.5rem; }
+    .dashboard-card .card-text.display-5 { font-size: 2rem; }
+}
+@media (max-width: 767.98px) { /* Mobile */
+    .dashboard-card { padding: 1rem; }
+    .dashboard-card .card-title { font-size: 1rem; }
+    .dashboard-card .card-text.display-5 { font-size: 1.8rem; }
+    .dashboard-card .table { font-size: 0.8rem; }
+    .dashboard-card .table th, .dashboard-card .table td { padding: 0.3rem; }
+    .dashboard-card .btn-outline-danger { font-size: 0.75rem; padding: 0.2rem 0.5rem; }
+}

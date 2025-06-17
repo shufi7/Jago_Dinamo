@@ -1,4 +1,4 @@
-// admin.js
+
 import { ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 document.addEventListener('DOMContentLoaded', () => {

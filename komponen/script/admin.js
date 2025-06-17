@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteModal = new bootstrap.Modal(deleteConfirmationModalElement);
     }
 
-    // Fungsi untuk menampilkan Toast
+    // Fungsi untuk menampilkan Toast 
     function showToast(message, type = 'success') {
         if (liveToastElement && toastMessageElement && liveToast) {
             toastMessageElement.textContent = message;

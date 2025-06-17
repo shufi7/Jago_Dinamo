@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Link -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,7 @@
 </head>
 
 <body>
+    <!-- Navbar sederhana -->
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top navbar-utama">
         <div class="container-fluid d-flex justify-content-between">
             <a class="navbar-brand d-flex align-items-center text-white" href="login.html">
@@ -54,6 +56,7 @@
     </nav>
 
     <div class="wrapper-admin">
+        <!-- Navbar Kiri -->
         <nav class="sidebar-admin">
             <div class="d-flex flex-column h-100">
                 <h5 class="mb-4 text-center">Menu Admin</h5>
@@ -81,6 +84,7 @@
             </div>
         </nav>
 
+        <!-- Table Data -->
         <main class="content-admin">
             <section class="table-admin text-black py-4">
                 <div class="container-fluid">
@@ -114,6 +118,7 @@
         </main>
     </div>
 
+    <!-- Pop up dibawah -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
@@ -124,6 +129,7 @@
         </div>
     </div>
 
+    <!-- Alert untuk hapus data -->
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content custom-modal-content">

@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let orderIdToDelete = null; // Menyimpan ID pesanan yang akan dihapus sementara
 
     // Inisialisasi Toast dan Modal setelah DOMContentLoaded
-    // Pastikan Bootstrap JS sudah dimuat (bootstrap.bundle.min.js)
     if (liveToastElement) {
         liveToast = new bootstrap.Toast(liveToastElement, {
             autohide: true,
@@ -163,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(`Gagal mengubah status pesanan.`, 'error');
             });
     }
-
+    
     function deleteOrder(orderId) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
         remove(orderRef)

@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elemen Modal Konfirmasi Hapus (Dihapus dari HTML, jadi ini mungkin tidak akan ditemukan)
     const deleteConfirmationModalElement = document.getElementById('deleteConfirmationModal'); // Ini mungkin tidak ada di HTML Anda sekarang
     const confirmDeleteButton = document.getElementById('confirmDeleteButton'); // Ini mungkin tidak ada di HTML Anda sekarang
-    // let deleteModal; // Hapus inisialisasi modal jika elemennya tidak ada
-    // let orderIdToDelete = null; // Hapus jika tidak digunakan
+
 
     // Inisialisasi Toast
     if (liveToastElement) {
@@ -45,12 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             delay: 3000
         });
     }
-    // Jika deleteConfirmationModalElement tidak ada di HTML adminprogres.html, bagian ini tidak perlu
-    /*
-    if (deleteConfirmationModalElement) {
-        deleteModal = new bootstrap.Modal(deleteConfirmationModalElement);
-    }
-    */
 
     // Fungsi untuk menampilkan Toast
     function showToast(message, type = 'success') {
@@ -77,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     onValue(ordersRef, (snapshot) => {
         const orders = snapshot.val();
         orderTableBody.innerHTML = '';
-        let hasRelevantOrders = false; // Mengganti hasApprovedOrders dengan nama yang lebih sesuai
+        let hasRelevantOrders = false; 
 
         if (orders) {
             Object.keys(orders).forEach(orderId => {
@@ -163,26 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             harga: newHarga
                         });
                     });
-
-                    // --- LOGIKA MENAMPILKAN TOMBOL "LANJUT KE KEUANGAN" setelah Simpan ---
-                    // Ini akan muncul setelah admin mengubah progres menjadi "Selesai diperbaiki"
-                    // (tombol "Hapus" tidak ada lagi di sini)
-                    if (order.progres === 'Selesai diperbaiki' && order.status === 'Disetujui') {
-                         // Jika pesanan sudah selesai, tambahkan tombol "Lanjut ke Keuangan"
-                         // Ini akan berguna jika halaman di-refresh dan pesanan sudah Selesai diperbaiki
-                         const financeLink = document.createElement('a');
-                         financeLink.href = `keuangan.html?orderId=${orderId}`; // Lewatkan ID pesanan
-                         financeLink.classList.add('btn', 'btn-info', 'btn-sm', 'ms-2'); // ms-2 untuk margin kiri
-                         financeLink.textContent = 'Keuangan';
-                         actionCell.appendChild(financeLink);
-                         // Tombol simpan mungkin perlu disembunyikan atau diganti di sini
-                         saveButton.style.display = 'none';
-                    } else {
-                         // Jika belum selesai, pastikan tombol simpan ada
-                         saveButton.style.display = 'inline-block';
-                    }
-
-                    // --- TOMBOL HAPUS TIDAK ADA LAGI DI SINI ---
                 } 
             });
 
@@ -198,19 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         orderTableBody.innerHTML = '<tr><td colspan="10" class="text-center text-danger">Gagal memuat data pesanan. Mohon periksa koneksi internet Anda.</td></tr>'; // Colspan 10
         showToast('Gagal memuat data pesanan.', 'error');
     });
-
-    /*
-    // Event listener untuk tombol Konfirmasi Hapus (Dihapus dari sini)
-    if (confirmDeleteButton) {
-        confirmDeleteButton.addEventListener('click', () => {
-            if (orderIdToDelete) {
-                // deleteOrder(orderIdToDelete); // Fungsi deleteOrder juga dihapus
-                // deleteModal.hide();
-                // orderIdToDelete = null;
-            }
-        });
-    }
-    */
 
     function updateOrderDetails(orderId, updates) {
         const orderRef = ref(database, `Pelanggan/${orderId}`);
@@ -243,18 +203,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(`Gagal mengubah detail pesanan. Mohon coba lagi.`, 'error');
             });
     }
-    /*
-    // Fungsi deleteOrder (Dihapus dari sini)
-    function deleteOrder(orderId) {
-        const orderRef = ref(database, `Pelanggan/${orderId}`);
-        remove(orderRef)
-            .then(() => {
-                showToast(`Data pesanan berhasil dihapus.`, 'success');
-            })
-            .catch((error) => {
-                console.error("Error menghapus data:", error);
-                showToast(`Gagal menghapus data pesanan. Mohon coba lagi.`, 'error');
-            });
-    }
-    */
 });

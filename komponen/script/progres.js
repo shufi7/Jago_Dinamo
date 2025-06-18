@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (nama === '' || telepon === '') {
             console.warn('Nama dan Nomor Telepon harus diisi.'); // Notifikasi di konsol
-            // Anda bisa menambahkan indikator visual di UI tanpa alert() di sini
+          
             noDataFound.textContent = 'Nama dan Nomor Telepon harus diisi.';
             noDataFound.style.display = 'block';
             return;
